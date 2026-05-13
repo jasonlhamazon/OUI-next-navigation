@@ -388,9 +388,7 @@ const ChildPagePopoverContent = ({ pageKey, onNavigate, onViewAll }) => {
       </div>
       {isEnhanced && onViewAll && (
         <div className="samplePagesLeftNav__threadPopoverFooter">
-          <OuiButtonEmpty
-            size="xs"
-            onClick={() => onViewAll(pageKey)}>
+          <OuiButtonEmpty size="xs" onClick={() => onViewAll(pageKey)}>
             View all
           </OuiButtonEmpty>
         </div>
@@ -452,6 +450,11 @@ const TabbedPanel = ({ tabs, activeTab, onTabChange, children }) => (
 
 // Default threads for the Thread panel
 export const DEFAULT_THREADS = [
+  {
+    key: 'onboarding',
+    title: 'OpenSearch onboarding',
+    subtitle: 'Setup assistant · 1 of 5 steps',
+  },
   {
     key: 'latency-spike',
     title: 'Latency spike investigation',
@@ -1009,6 +1012,11 @@ const MorePanelContent = ({
 const ThreadPopoverContent = ({ onNavigate, onViewAll }) => {
   const items = [
     {
+      key: 'onboarding',
+      title: 'OpenSearch onboarding',
+      subtitle: 'Setup assistant · 1 of 5 steps',
+    },
+    {
       key: 'latency-spike',
       title: 'Latency spike investigation',
       subtitle: 'Sarah Lee · 2 hours ago',
@@ -1078,9 +1086,7 @@ const ThreadPopoverContent = ({ onNavigate, onViewAll }) => {
         ))}
       </div>
       <div className="samplePagesLeftNav__threadPopoverFooter">
-        <OuiButtonEmpty
-          size="xs"
-          onClick={() => onViewAll('thread')}>
+        <OuiButtonEmpty size="xs" onClick={() => onViewAll('thread')}>
           View all
         </OuiButtonEmpty>
       </div>
@@ -1136,9 +1142,7 @@ const DashboardsPopoverContent = ({ onNavigate, onViewAll }) => {
         ))}
       </div>
       <div className="samplePagesLeftNav__threadPopoverFooter">
-        <OuiButtonEmpty
-          size="xs"
-          onClick={() => onViewAll('dashboards')}>
+        <OuiButtonEmpty size="xs" onClick={() => onViewAll('dashboards')}>
           View all
         </OuiButtonEmpty>
       </div>
@@ -1181,7 +1185,8 @@ const LogsPopoverContent = ({ onNavigate, onViewAll }) => {
       {
         key: 'query-top-users',
         title: 'Top users by request count',
-        subtitle: 'source=logs | stats count() as requests by user | sort -requests | head 50',
+        subtitle:
+          'source=logs | stats count() as requests by user | sort -requests | head 50',
       },
     ],
   };
@@ -1200,10 +1205,14 @@ const LogsPopoverContent = ({ onNavigate, onViewAll }) => {
       </div>
       <div style={{ padding: '0 12px', marginTop: 8 }}>
         <OuiTabs size="s" display="condensed">
-          <OuiTab isSelected={activeTab === 'saved-results'} onClick={() => setActiveTab('saved-results')}>
+          <OuiTab
+            isSelected={activeTab === 'saved-results'}
+            onClick={() => setActiveTab('saved-results')}>
             Saved results
           </OuiTab>
-          <OuiTab isSelected={activeTab === 'saved-query'} onClick={() => setActiveTab('saved-query')}>
+          <OuiTab
+            isSelected={activeTab === 'saved-query'}
+            onClick={() => setActiveTab('saved-query')}>
             Saved query
           </OuiTab>
         </OuiTabs>
@@ -1225,9 +1234,7 @@ const LogsPopoverContent = ({ onNavigate, onViewAll }) => {
         ))}
       </div>
       <div className="samplePagesLeftNav__threadPopoverFooter">
-        <OuiButtonEmpty
-          size="xs"
-          onClick={() => onViewAll('logs')}>
+        <OuiButtonEmpty size="xs" onClick={() => onViewAll('logs')}>
           View all
         </OuiButtonEmpty>
       </div>
@@ -1260,17 +1267,20 @@ const MetricsPopoverContent = ({ onNavigate, onViewAll }) => {
       {
         key: 'query-disk-io',
         title: 'Disk I/O by volume',
-        subtitle: 'source=metrics | stats avg(disk_io) by volume | sort -avg_disk_io',
+        subtitle:
+          'source=metrics | stats avg(disk_io) by volume | sort -avg_disk_io',
       },
       {
         key: 'query-network-errors',
         title: 'Network error rate',
-        subtitle: 'source=metrics | where net_errors > 0 | stats sum(net_errors) by interface',
+        subtitle:
+          'source=metrics | where net_errors > 0 | stats sum(net_errors) by interface',
       },
       {
         key: 'query-gc-pauses',
         title: 'GC pause duration',
-        subtitle: 'source=metrics | stats max(gc_pause_ms) by service | sort -max_gc_pause_ms',
+        subtitle:
+          'source=metrics | stats max(gc_pause_ms) by service | sort -max_gc_pause_ms',
       },
     ],
   };
@@ -1289,10 +1299,14 @@ const MetricsPopoverContent = ({ onNavigate, onViewAll }) => {
       </div>
       <div style={{ padding: '0 12px', marginTop: 8 }}>
         <OuiTabs size="s" display="condensed">
-          <OuiTab isSelected={activeTab === 'saved-results'} onClick={() => setActiveTab('saved-results')}>
+          <OuiTab
+            isSelected={activeTab === 'saved-results'}
+            onClick={() => setActiveTab('saved-results')}>
             Saved results
           </OuiTab>
-          <OuiTab isSelected={activeTab === 'saved-query'} onClick={() => setActiveTab('saved-query')}>
+          <OuiTab
+            isSelected={activeTab === 'saved-query'}
+            onClick={() => setActiveTab('saved-query')}>
             Saved query
           </OuiTab>
         </OuiTabs>
@@ -1314,9 +1328,7 @@ const MetricsPopoverContent = ({ onNavigate, onViewAll }) => {
         ))}
       </div>
       <div className="samplePagesLeftNav__threadPopoverFooter">
-        <OuiButtonEmpty
-          size="xs"
-          onClick={() => onViewAll('metrics')}>
+        <OuiButtonEmpty size="xs" onClick={() => onViewAll('metrics')}>
           View all
         </OuiButtonEmpty>
       </div>
@@ -1348,7 +1360,11 @@ const PopoverItemWithHover = ({ pageKey, children, onNavigate, onViewAll }) => {
         panelPaddingSize="s"
         panelClassName="samplePagesLeftNav__popoverPanel">
         <div onMouseEnter={open} onMouseLeave={close}>
-          <ChildPagePopoverContent pageKey={pageKey} onNavigate={onNavigate} onViewAll={onViewAll} />
+          <ChildPagePopoverContent
+            pageKey={pageKey}
+            onNavigate={onNavigate}
+            onViewAll={onViewAll}
+          />
         </div>
       </OuiPopover>
     </div>
@@ -1382,7 +1398,10 @@ const ToolsPanelContent = ({
     <div className="samplePagesLeftNav__toolsPopover">
       <div className="samplePagesLeftNav__toolsPopoverHeader">More</div>
       <div className="samplePagesLeftNav__toolsPopoverContent">
-        <PopoverItemWithHover pageKey="notebooks" onNavigate={handleNavigate} onViewAll={onViewAll}>
+        <PopoverItemWithHover
+          pageKey="notebooks"
+          onNavigate={handleNavigate}
+          onViewAll={onViewAll}>
           <button
             type="button"
             className="samplePagesLeftNav__toolsPopoverItem"
@@ -1663,7 +1682,12 @@ const APPEARANCE_OPTIONS = [
   { key: 'system', label: 'System' },
 ];
 
-const SettingsPopoverContent = ({ onPageChange, themeContext, appearanceSelection, onAppearanceChange }) => {
+const SettingsPopoverContent = ({
+  onPageChange,
+  themeContext,
+  appearanceSelection,
+  onAppearanceChange,
+}) => {
   const [appearanceOpen, setAppearanceOpen] = useState(false);
   const appearanceTimer = useRef(null);
   const openAppearance = () => {
@@ -1678,7 +1702,8 @@ const SettingsPopoverContent = ({ onPageChange, themeContext, appearanceSelectio
     if (!themeContext) return;
     if (onAppearanceChange) onAppearanceChange(themeKey);
     if (themeKey === 'system') {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)')
+        .matches;
       themeContext.changeTheme(prefersDark ? 'v9-dark' : 'v9-light');
     } else {
       themeContext.changeTheme(themeKey);
@@ -1734,7 +1759,12 @@ const SettingsPopoverContent = ({ onPageChange, themeContext, appearanceSelectio
                 <span className="samplePagesLeftNav__toolsPopoverItemLabel">
                   Appearance
                 </span>
-                <OuiIcon type="arrowRight" size="m" color="subdued" style={{ marginRight: 8 }} />
+                <OuiIcon
+                  type="arrowRight"
+                  size="m"
+                  color="subdued"
+                  style={{ marginRight: 8 }}
+                />
               </button>
             }
             isOpen={appearanceOpen}
@@ -1754,7 +1784,12 @@ const SettingsPopoverContent = ({ onPageChange, themeContext, appearanceSelectio
                       onClick={() => handleThemeSelect(opt.key)}>
                       <div
                         className="samplePagesLeftNav__navItemIconWrap"
-                      style={{ visibility: appearanceSelection === opt.key ? 'visible' : 'hidden' }}>
+                        style={{
+                          visibility:
+                            appearanceSelection === opt.key
+                              ? 'visible'
+                              : 'hidden',
+                        }}>
                         <OuiIcon type="check" size="m" />
                       </div>
                       <span>{opt.label}</span>
@@ -2137,7 +2172,9 @@ export const SamplePagesLeftNav = ({
 }) => {
   const themeContext = useContext(ThemeContext);
   const isDark = themeContext.theme === 'v9-dark';
-  const [appearanceSelection, setAppearanceSelection] = useState(isDark ? 'v9-dark' : 'v9-light');
+  const [appearanceSelection, setAppearanceSelection] = useState(
+    isDark ? 'v9-dark' : 'v9-light'
+  );
   const [expandedTab, setExpandedTab] = useState(null);
   const [isCollapsing, setIsCollapsing] = useState(false);
   const [appsPopoverOpen, setAppsPopoverOpen] = useState(false);
@@ -2370,7 +2407,9 @@ export const SamplePagesLeftNav = ({
           <div className="samplePagesLeftNav__headerActions">
             <OuiButtonIcon
               iconType={isNavLocked ? 'lock' : 'lockOpen'}
-              aria-label={isNavLocked ? 'Unlock navigation' : 'Lock navigation open'}
+              aria-label={
+                isNavLocked ? 'Unlock navigation' : 'Lock navigation open'
+              }
               color="text"
               display="empty"
               size="xs"
@@ -2983,7 +3022,8 @@ export const SamplePagesLeftNav = ({
                           setNavPopover(null);
                           onViewAll(page);
                         }}
-                      />) : (
+                      />
+                    ) : (
                       <PopoverContent
                         onNavigate={(page, itemKey) => {
                           setNavPopover(null);

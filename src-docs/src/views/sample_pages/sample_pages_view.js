@@ -17,6 +17,7 @@ import { ServicePage } from './service_page';
 import { LogsPage } from './logs_page';
 import { MetricsPage } from './metrics_page';
 import { ThreadPage } from './thread_page';
+import { OnboardingPage } from './onboarding_page';
 import { AlertsPage } from './alerts_page';
 import { DashboardsPage } from './dashboards_page';
 import { SkillsPage } from './skills_page';
@@ -70,7 +71,10 @@ const renderPage = (
     case 'home':
       return (
         <OuiErrorBoundary>
-          <HomePage onNavigate={onNavigate} onContinueAsThread={onContinueAsThread} />
+          <HomePage
+            onNavigate={onNavigate}
+            onContinueAsThread={onContinueAsThread}
+          />
         </OuiErrorBoundary>
       );
     case 'logs':
@@ -96,6 +100,16 @@ const renderPage = (
         </OuiErrorBoundary>
       );
     case 'thread':
+      if (selectedItem === 'onboarding') {
+        return (
+          <OuiErrorBoundary>
+            <OnboardingPage
+              isPanelOpen={isPanelOpen}
+              onTogglePanel={onTogglePanel}
+            />
+          </OuiErrorBoundary>
+        );
+      }
       return (
         <OuiErrorBoundary>
           <ThreadPage
@@ -507,12 +521,14 @@ export const SamplePagesView = () => {
           {
             key: 'query-5xx-responses',
             title: '5xx responses',
-            subtitle: 'source=logs | where status >= 500 | stats count() by path',
+            subtitle:
+              'source=logs | where status >= 500 | stats count() by path',
           },
           {
             key: 'query-top-users',
             title: 'Top users by request count',
-            subtitle: 'source=logs | stats count() as requests by user | sort -requests | head 50',
+            subtitle:
+              'source=logs | stats count() as requests by user | sort -requests | head 50',
           },
         ],
       },
@@ -562,17 +578,20 @@ export const SamplePagesView = () => {
           {
             key: 'query-disk-io',
             title: 'Disk I/O by volume',
-            subtitle: 'source=metrics | stats avg(disk_io) by volume | sort -avg_disk_io',
+            subtitle:
+              'source=metrics | stats avg(disk_io) by volume | sort -avg_disk_io',
           },
           {
             key: 'query-network-errors',
             title: 'Network error rate',
-            subtitle: 'source=metrics | where net_errors > 0 | stats sum(net_errors) by interface',
+            subtitle:
+              'source=metrics | where net_errors > 0 | stats sum(net_errors) by interface',
           },
           {
             key: 'query-gc-pauses',
             title: 'GC pause duration',
-            subtitle: 'source=metrics | stats max(gc_pause_ms) by service | sort -max_gc_pause_ms',
+            subtitle:
+              'source=metrics | stats max(gc_pause_ms) by service | sort -max_gc_pause_ms',
           },
         ],
       },
@@ -926,21 +945,24 @@ export const SamplePagesView = () => {
     setSelectedItem(itemKey || null);
   }, []);
 
-  const handleViewAll = useCallback((page) => {
-    if (page === activePage) {
-      setIsPanelOpen(true);
-      setIsPanelCollapsing(false);
-    } else {
-      skipPanelOpenRef.current = true;
-      setActivePage(page);
-      setSelectedItem(DEFAULT_ITEMS[page] || null);
-      // Force panel open after the skipPanelOpenRef useEffect runs
-      setTimeout(() => {
+  const handleViewAll = useCallback(
+    (page) => {
+      if (page === activePage) {
         setIsPanelOpen(true);
         setIsPanelCollapsing(false);
-      }, 0);
-    }
-  }, [activePage]);
+      } else {
+        skipPanelOpenRef.current = true;
+        setActivePage(page);
+        setSelectedItem(DEFAULT_ITEMS[page] || null);
+        // Force panel open after the skipPanelOpenRef useEffect runs
+        setTimeout(() => {
+          setIsPanelOpen(true);
+          setIsPanelCollapsing(false);
+        }, 0);
+      }
+    },
+    [activePage]
+  );
 
   const handleNavAskAi = useCallback((text) => {
     setNavAskAiInitialPrompt(text || '');
@@ -1081,29 +1103,29 @@ export const SamplePagesView = () => {
           )}
           {panelConfig && isPanelOpen && (
             <>
-            <div
-              className={`detailPageFlyout__cover${
-                isPanelCollapsing ? ' detailPageFlyout__cover--closing' : ''
-              }`}
-              onClick={handlePanelClose}
-            />
-            <div
-              className={`detailPageFlyout${
-                isPanelCollapsing ? ' detailPageFlyout--closing' : ''
-              }`}>
-              <DetailPagePanel
-                title={panelConfig.title}
-                items={panelConfig.items}
-                tabs={panelConfig.tabs}
-                tabItems={panelConfig.tabItems}
-                selectedItem={selectedItem}
-                onItemSelect={(key) => {
-                  setSelectedItem(key);
-                  handlePanelClose();
-                }}
-                onClose={handlePanelClose}
+              <div
+                className={`detailPageFlyout__cover${
+                  isPanelCollapsing ? ' detailPageFlyout__cover--closing' : ''
+                }`}
+                onClick={handlePanelClose}
               />
-            </div>
+              <div
+                className={`detailPageFlyout${
+                  isPanelCollapsing ? ' detailPageFlyout--closing' : ''
+                }`}>
+                <DetailPagePanel
+                  title={panelConfig.title}
+                  items={panelConfig.items}
+                  tabs={panelConfig.tabs}
+                  tabItems={panelConfig.tabItems}
+                  selectedItem={selectedItem}
+                  onItemSelect={(key) => {
+                    setSelectedItem(key);
+                    handlePanelClose();
+                  }}
+                  onClose={handlePanelClose}
+                />
+              </div>
             </>
           )}
         </div>

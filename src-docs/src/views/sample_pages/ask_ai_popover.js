@@ -172,7 +172,13 @@ export const AskAiPopover = ({
   const popoverStyle = hasBeenDragged
     ? { position: 'fixed', left: position.x, top: position.y, zIndex: 10000 }
     : anchorPosition
-    ? { position: 'fixed', top: anchorPosition.top, left: anchorPosition.left, transform: 'translateX(-50%)', zIndex: 10000 }
+    ? {
+        position: 'fixed',
+        top: anchorPosition.top,
+        left: anchorPosition.left,
+        transform: 'translateX(-50%)',
+        zIndex: 10000,
+      }
     : {};
 
   return (

@@ -10,10 +10,7 @@
  */
 
 import React from 'react';
-import {
-  OuiButtonIcon,
-  OuiToolTip,
-} from '../../../../src/components';
+import { OuiButtonIcon, OuiToolTip } from '../../../../src/components';
 import { AskAiPopover } from './ask_ai_popover';
 
 export const DetailPageHeader = ({
@@ -107,7 +104,9 @@ export const DetailPageHeader = ({
       )}
       <div className="detailPageHeader__title">
         {onTogglePanel && (
-          <OuiToolTip content={isPanelOpen ? 'Close panel' : 'Open panel'} position="bottom">
+          <OuiToolTip
+            content={isPanelOpen ? 'Close panel' : 'Open panel'}
+            position="bottom">
             <OuiButtonIcon
               iconType={isPanelOpen ? 'folderOpen' : 'folderClosed'}
               aria-label={isPanelOpen ? 'Close panel' : 'Open panel'}
@@ -139,7 +138,10 @@ export const DetailPageHeader = ({
               {action.render()}
             </React.Fragment>
           ) : (
-            <OuiToolTip key={`extra-${index}`} content={action.label} position="bottom">
+            <OuiToolTip
+              key={`extra-${index}`}
+              content={action.label}
+              position="bottom">
               <OuiButtonIcon
                 iconType={action.iconType}
                 aria-label={action.label}
@@ -165,7 +167,9 @@ export const DetailPageHeader = ({
         <div className="askAiFloating">
           <OuiToolTip content="Highlight to Ask AI" position="top">
             <OuiButtonIcon
-              className={`askAiFloating__button${isHighlightMode ? ' askAiFloating__button--active' : ''}`}
+              className={`askAiFloating__button${
+                isHighlightMode ? ' askAiFloating__button--active' : ''
+              }`}
               iconType="visText"
               aria-label="Highlight to Ask AI"
               size="m"
@@ -176,7 +180,9 @@ export const DetailPageHeader = ({
           </OuiToolTip>
           <OuiToolTip content="Ask AI" position="top">
             <OuiButtonIcon
-              className={`askAiFloating__button${isAskAiActive ? ' askAiFloating__button--active' : ''}`}
+              className={`askAiFloating__button${
+                isAskAiActive ? ' askAiFloating__button--active' : ''
+              }`}
               iconType="generate"
               aria-label="Ask AI"
               size="m"

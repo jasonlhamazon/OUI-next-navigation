@@ -208,7 +208,8 @@ const THREADS = {
       {
         role: 'user',
         author: 'Dana Kim',
-        content: 'Can you confirm the ACME key rotation will not cause downtime?',
+        content:
+          'Can you confirm the ACME key rotation will not cause downtime?',
       },
       {
         role: 'assistant',
@@ -318,7 +319,13 @@ const AddToCanvasButton = ({ onClick, added }) => (
 );
 
 // Attachment card: page reference (title + description, clickable to view in related assets)
-const PageAttachment = ({ title, description, onAddToCanvas, onViewInCanvas, canvasItems }) => {
+const PageAttachment = ({
+  title,
+  description,
+  onAddToCanvas,
+  onViewInCanvas,
+  canvasItems,
+}) => {
   const added = canvasItems.some((c) => c.type === 'page' && c.title === title);
   const handleClick = () => {
     onViewInCanvas({ type: 'page', title, description });
@@ -768,16 +775,36 @@ export const ThreadPage = ({
                 <OuiContextMenuPanel
                   hasFocus={false}
                   items={[
-                    <OuiContextMenuItem key="skills" onClick={() => { setIsSettingsOpen(false); onPageChange && onPageChange('ai-skills'); }}>
+                    <OuiContextMenuItem
+                      key="skills"
+                      onClick={() => {
+                        setIsSettingsOpen(false);
+                        onPageChange && onPageChange('ai-skills');
+                      }}>
                       Skills
                     </OuiContextMenuItem>,
-                    <OuiContextMenuItem key="memories" onClick={() => { setIsSettingsOpen(false); onPageChange && onPageChange('ai-memories'); }}>
+                    <OuiContextMenuItem
+                      key="memories"
+                      onClick={() => {
+                        setIsSettingsOpen(false);
+                        onPageChange && onPageChange('ai-memories');
+                      }}>
                       Memories
                     </OuiContextMenuItem>,
-                    <OuiContextMenuItem key="automations" onClick={() => { setIsSettingsOpen(false); onPageChange && onPageChange('ai-automations'); }}>
+                    <OuiContextMenuItem
+                      key="automations"
+                      onClick={() => {
+                        setIsSettingsOpen(false);
+                        onPageChange && onPageChange('ai-automations');
+                      }}>
                       Automations
                     </OuiContextMenuItem>,
-                    <OuiContextMenuItem key="mcp" onClick={() => { setIsSettingsOpen(false); onPageChange && onPageChange('ai-mcp-servers'); }}>
+                    <OuiContextMenuItem
+                      key="mcp"
+                      onClick={() => {
+                        setIsSettingsOpen(false);
+                        onPageChange && onPageChange('ai-mcp-servers');
+                      }}>
                       MCP Servers
                     </OuiContextMenuItem>,
                   ]}
@@ -938,7 +965,8 @@ export const ThreadPage = ({
               {canvasDetailItem ? (
                 <OuiText size="s" color="subdued">
                   <p>
-                    This is a placeholder for the detail view of &ldquo;{canvasDetailItem.title}&rdquo;.
+                    This is a placeholder for the detail view of &ldquo;
+                    {canvasDetailItem.title}&rdquo;.
                   </p>
                   {canvasDetailItem.description && (
                     <p>{canvasDetailItem.description}</p>
