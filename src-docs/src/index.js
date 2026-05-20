@@ -38,6 +38,8 @@ import {
 import { LoginPage } from './views/sample_pages/login_page';
 import { OnboardingPage } from './views/sample_pages/onboarding_page';
 import { OnboardingWizardPage } from './views/sample_pages/onboarding_wizard_page';
+import { NewSessionPageV2 } from './views/sample_pages/new_session_page_v2';
+import { NewSessionPageV3 } from './views/sample_pages/new_session_page_v3';
 
 registerTheme('light', [themeLight]);
 registerTheme('dark', [themeDark]);
@@ -113,6 +115,22 @@ render(
             render={() => (
               <LinkWrapper>
                 <SamplePagesView />
+              </LinkWrapper>
+            )}
+          />
+          <Route
+            path="/new-session-v2"
+            render={() => (
+              <LinkWrapper>
+                <NewSessionPageV2 />
+              </LinkWrapper>
+            )}
+          />
+          <Route
+            path="/new-session-v3"
+            render={() => (
+              <LinkWrapper>
+                <NewSessionPageV3 />
               </LinkWrapper>
             )}
           />

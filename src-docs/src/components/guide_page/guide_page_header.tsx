@@ -131,6 +131,38 @@ export const GuidePageHeader: React.FunctionComponent<{}> = () => {
     );
   }
 
+  function renderNewSessionV2() {
+    const handleClick = () => {
+      window.open(`${window.location.origin}${window.location.pathname}#/new-session-v2`, '_blank');
+    };
+    return (
+      <OuiButton
+        size="s"
+        onClick={handleClick}
+        color="ghost"
+        minWidth={0}
+        style={{ marginRight: 16 }}>
+        New Page 2
+      </OuiButton>
+    );
+  }
+
+  function renderNewSessionV3() {
+    const handleClick = () => {
+      window.open(`${window.location.origin}${window.location.pathname}#/new-session-v3`, '_blank');
+    };
+    return (
+      <OuiButton
+        size="s"
+        onClick={handleClick}
+        color="ghost"
+        minWidth={0}
+        style={{ marginRight: 16 }}>
+        New Page 3
+      </OuiButton>
+    );
+  }
+
   const [mobilePopoverIsOpen, setMobilePopoverIsOpen] = useState(false);
 
   function renderMobileMenu() {
@@ -152,6 +184,7 @@ export const GuidePageHeader: React.FunctionComponent<{}> = () => {
         <div className="guideOptionsPopover">{renderFigma()}</div>
         <div className="guideOptionsPopover">{renderSamplePages()}</div>
         <div className="guideOptionsPopover">{renderMarketingPage()}</div>
+        <div className="guideOptionsPopover">{renderNewSessionV2()}</div>
       </OuiPopover>
     );
   }
@@ -159,6 +192,8 @@ export const GuidePageHeader: React.FunctionComponent<{}> = () => {
   const rightSideItems = isMobileSize
     ? [<GuideThemeSelector />, renderMobileMenu()]
     : [
+        renderNewSessionV3(),
+        renderNewSessionV2(),
         renderMarketingPage(),
         renderSamplePages(),
         <GuideThemeSelector />,

@@ -122,11 +122,6 @@ function OSLogo({ size = 20, spinKey = 0 }) {
 function NavRail({ onExpand, spinKey, dark, navPopover, openNavPopover, closeNavPopover, setNavPopover, themeContext, appearanceSelection, setAppearanceSelection, onCreateSession, onBrowseSessions }) {
   const t = dark ? DARK : LIGHT;
 
-  const aiItems = [
-    { icon: 'agents', label: 'Agents' },
-    { icon: 'evaluations', label: 'Evaluations' },
-  ];
-
   return (
     <div
       onClick={onExpand}
@@ -151,10 +146,6 @@ function NavRail({ onExpand, spinKey, dark, navPopover, openNavPopover, closeNav
         <RailButton icon="plus" t={t} onClick={(e) => { e.stopPropagation(); onCreateSession && onCreateSession(); }} />
         <RailButton icon="search" t={t} onClick={(e) => e.stopPropagation()} />
         <RailButton icon="chats2" t={t} onClick={(e) => { e.stopPropagation(); onBrowseSessions && onBrowseSessions(); }} />
-        <Divider width={24} color={t.divider} />
-        {aiItems.map((it) => (
-          <RailButton key={it.label} icon={it.icon} t={t} onClick={(e) => e.stopPropagation()} />
-        ))}
       </div>
 
       {/* Bottom pinned section with popovers */}
@@ -345,12 +336,10 @@ function NavPanel({ onCollapse, spinKey, dark, navPopover, openNavPopover, close
         <PanelItem icon="search" label="Search" t={t} />
       </div>
 
-      {/* Scrollable middle: All sessions, AI tools, Recent */}
+      {/* Scrollable middle: All sessions, Recent */}
       <div style={{ flex: 1, overflowY: 'auto', padding: '0 8px', minHeight: 0 }}>
         <div style={{ padding: '2px 0 4px' }}>
           <PanelItem icon="chats2" label="All sessions" t={t} onClick={onBrowseSessions} />
-          <PanelItemWithBadge icon="agents" label="Agents" badge="3" t={t} />
-          <PanelItem icon="evaluations" label="Evaluations" t={t} />
         </div>
 
         <div style={{ height: 1, background: t.dividerPanel, margin: '6px 0' }} />
@@ -619,7 +608,7 @@ function Divider({ width, color }) {
 // ANIMATED SIDEBAR (wrapper)
 // ============================================================
 
-export const AnimatedSidebar = ({ collapsed, setCollapsed, onCreateSession, onBrowseSessions, sessions, activeSessionId, onSelectSession }) => {
+export const AnimatedSidebar = ({ collapsed, setCollapsed, onCreateSession, onBrowseSessions, sessions, activeSessionId, onSelectSession, locked }) => {
   const themeContext = useContext(ThemeContext);
   const dark = themeContext.theme === 'v9-dark';
   const t = dark ? DARK : LIGHT;
@@ -726,7 +715,7 @@ export const AnimatedSidebar = ({ collapsed, setCollapsed, onCreateSession, onBr
           pointerEvents: collapsed ? 'auto' : 'none',
         }}>
           <NavRail
-            onExpand={() => setCollapsed(false)}
+            onExpand={() => { if (!locked) setCollapsed(false); }}
             spinKey={spinKey}
             dark={dark}
             navPopover={collapsed ? navPopover : null}
