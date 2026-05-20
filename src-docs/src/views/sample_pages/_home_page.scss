@@ -1,0 +1,269 @@
+/*!
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * The OpenSearch Contributors require contributions made to
+ * this file be licensed under the Apache-2.0 license or a
+ * compatible open source license.
+ *
+ * Modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
+ */
+
+// sass-lint:disable no-color-literals
+
+.homePage__v4 {
+  height: 100%;
+  width: 100%;
+  padding: 40px 56px 48px;
+  overflow-y: auto;
+  background-image: radial-gradient(circle, rgba($ouiColorPrimary, 0.08) 0.9px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+
+.homePage__v4Content {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+// Headline
+.homePage__v4Headline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.homePage__v4Title {
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: -0.6px;
+  line-height: 1.1;
+  margin: 0;
+  color: $ouiTitleColor;
+}
+
+.homePage__v4Subtitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.3px;
+  line-height: 1.4;
+  color: $ouiColorPrimary;
+  margin-top: 8px;
+}
+
+// Input
+.homePage__v4InputWrap {
+  position: relative;
+}
+
+.homePage__v4InputField {
+  position: relative;
+}
+
+.homePage__v4Textarea textarea {
+  padding-bottom: 40px;
+}
+
+.homePage__v4InputActions {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+
+  > * {
+    pointer-events: auto;
+  }
+}
+
+// Circles row
+.homePage__v4Circles {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 4px;
+}
+
+.homePage__v4CircleItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.homePage__v4CircleIcon {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: $ouiColorLightestShade;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $ouiColorMediumShade;
+  transition: background-color 150ms ease-in-out;
+
+  &:hover {
+    background-color: $ouiColorLightShade;
+  }
+
+  &--active {
+    background-color: $ouiColorPrimary;
+    color: #FFFFFF;
+
+    &:hover {
+      background-color: darken($ouiColorPrimary, 5%);
+    }
+  }
+}
+
+.homePage__v4Badge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  font-size: 9px;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 1px 4px;
+  line-height: 1.2;
+
+  &--default {
+    background: $ouiColorEmptyShade;
+    color: $ouiColorPrimary;
+    border: 1.5px solid $ouiColorLightShade;
+  }
+
+  &--primary {
+    background: $ouiColorPrimary;
+    color: #FFFFFF;
+    border: 1.5px solid #FFFFFF;
+  }
+
+  &--danger {
+    background: $ouiColorDanger;
+    color: #FFFFFF;
+    border: 1.5px solid #FFFFFF;
+  }
+}
+
+.homePage__v4CircleLabel {
+  font-size: 11px;
+  text-align: center;
+  line-height: 1.3;
+  color: $ouiColorDarkShade;
+  max-width: 80px;
+
+  .homePage__v4CircleItem--active & {
+    color: $ouiColorPrimary;
+    font-weight: 500;
+  }
+}
+
+// Favorites list
+.homePage__v4Favorites {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.homePage__v4FavoritesHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.homePage__v4FavoritesTitle {
+  font-size: 12px;
+  font-weight: 500;
+  color: $ouiColorMediumShade;
+}
+
+.homePage__v4FavoritesCount {
+  color: $ouiColorLightShade;
+  font-weight: 400;
+}
+
+.homePage__v4FilterButton {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: $ouiColorPrimary;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid $ouiColorLightShade;
+  background: $ouiColorLightestShade;
+  cursor: pointer;
+
+  &:hover {
+    background: darken($ouiColorLightestShade, 3%);
+  }
+}
+
+.homePage__v4FavoritesList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.homePage__v4FavoritesItem {
+  background: $ouiColorEmptyShade;
+  border-radius: 9px;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  text-align: left;
+  transition: background-color 150ms ease-in-out;
+
+  &:hover {
+    background-color: $ouiColorLightestShade;
+  }
+}
+
+.homePage__v4FavoritesItemText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.homePage__v4FavoritesItemName {
+  font-size: 13px;
+  font-weight: 500;
+  color: $ouiTitleColor;
+}
+
+.homePage__v4FavoritesItemMeta {
+  font-size: 10.5px;
+  color: $ouiColorLightShade;
+}
+
+.homePage__v4FavoritesItemIcon {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  &--default {
+    background: $ouiColorLightestShade;
+    color: $ouiColorPrimary;
+  }
+
+  &--alert {
+    background: lightOrDarkTheme(#FCE7EC, rgba($ouiColorDanger, 0.15));
+    color: $ouiColorDanger;
+  }
+}

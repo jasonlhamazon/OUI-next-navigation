@@ -37,7 +37,7 @@ const SystemOverviewDashboard = () => (
   <div className="dashboardPage__content">
     <OuiFlexGroup gutterSize="m">
       <OuiFlexItem>
-        <OuiPanel paddingSize="m" hasShadow={false} hasBorder>
+        <OuiPanel paddingSize="l" hasShadow={false} hasBorder={false}>
           <OuiStat
             title="99.7%"
             description="Uptime"
@@ -47,12 +47,12 @@ const SystemOverviewDashboard = () => (
         </OuiPanel>
       </OuiFlexItem>
       <OuiFlexItem>
-        <OuiPanel paddingSize="m" hasShadow={false} hasBorder>
+        <OuiPanel paddingSize="l" hasShadow={false} hasBorder={false}>
           <OuiStat title="24" description="Active nodes" titleSize="m" />
         </OuiPanel>
       </OuiFlexItem>
       <OuiFlexItem>
-        <OuiPanel paddingSize="m" hasShadow={false} hasBorder>
+        <OuiPanel paddingSize="l" hasShadow={false} hasBorder={false}>
           <OuiStat
             title="3"
             description="Active alerts"
@@ -62,17 +62,17 @@ const SystemOverviewDashboard = () => (
         </OuiPanel>
       </OuiFlexItem>
       <OuiFlexItem>
-        <OuiPanel paddingSize="m" hasShadow={false} hasBorder>
+        <OuiPanel paddingSize="l" hasShadow={false} hasBorder={false}>
           <OuiStat title="1.2 TB" description="Storage used" titleSize="m" />
         </OuiPanel>
       </OuiFlexItem>
     </OuiFlexGroup>
 
-    <OuiSpacer size="m" />
+    <OuiSpacer size="l" />
 
     <OuiFlexGroup gutterSize="m">
       <OuiFlexItem grow={2}>
-        <OuiPanel paddingSize="m" hasShadow={false} hasBorder>
+        <OuiPanel paddingSize="l" hasShadow={false} hasBorder={false}>
           <OuiTitle size="xs">
             <h3>Cluster health</h3>
           </OuiTitle>
@@ -149,7 +149,7 @@ const SystemOverviewDashboard = () => (
         </OuiPanel>
       </OuiFlexItem>
       <OuiFlexItem grow={1}>
-        <OuiPanel paddingSize="m" hasShadow={false} hasBorder>
+        <OuiPanel paddingSize="l" hasShadow={false} hasBorder={false}>
           <OuiTitle size="xs">
             <h3>Recent alerts</h3>
           </OuiTitle>
@@ -195,9 +195,9 @@ const SystemOverviewDashboard = () => (
       </OuiFlexItem>
     </OuiFlexGroup>
 
-    <OuiSpacer size="m" />
+    <OuiSpacer size="l" />
 
-    <OuiPanel paddingSize="m" hasShadow={false} hasBorder>
+    <OuiPanel paddingSize="l" hasShadow={false} hasBorder={false}>
       <OuiTitle size="xs">
         <h3>Index statistics</h3>
       </OuiTitle>
@@ -257,17 +257,17 @@ const WebTrafficDashboard = () => (
   <div className="dashboardPage__content">
     <OuiFlexGroup gutterSize="m">
       <OuiFlexItem>
-        <OuiPanel paddingSize="m" hasShadow={false} hasBorder>
+        <OuiPanel paddingSize="l" hasShadow={false} hasBorder={false}>
           <OuiStat title="2.4M" description="Page views (24h)" titleSize="m" />
         </OuiPanel>
       </OuiFlexItem>
       <OuiFlexItem>
-        <OuiPanel paddingSize="m" hasShadow={false} hasBorder>
+        <OuiPanel paddingSize="l" hasShadow={false} hasBorder={false}>
           <OuiStat title="842K" description="Unique visitors" titleSize="m" />
         </OuiPanel>
       </OuiFlexItem>
       <OuiFlexItem>
-        <OuiPanel paddingSize="m" hasShadow={false} hasBorder>
+        <OuiPanel paddingSize="l" hasShadow={false} hasBorder={false}>
           <OuiStat
             title="3.2s"
             description="Avg. load time"
@@ -277,7 +277,7 @@ const WebTrafficDashboard = () => (
         </OuiPanel>
       </OuiFlexItem>
       <OuiFlexItem>
-        <OuiPanel paddingSize="m" hasShadow={false} hasBorder>
+        <OuiPanel paddingSize="l" hasShadow={false} hasBorder={false}>
           <OuiStat
             title="32.1%"
             description="Bounce rate"
@@ -288,11 +288,11 @@ const WebTrafficDashboard = () => (
       </OuiFlexItem>
     </OuiFlexGroup>
 
-    <OuiSpacer size="m" />
+    <OuiSpacer size="l" />
 
     <OuiFlexGroup gutterSize="m">
       <OuiFlexItem>
-        <OuiPanel paddingSize="m" hasShadow={false} hasBorder>
+        <OuiPanel paddingSize="l" hasShadow={false} hasBorder={false}>
           <OuiTitle size="xs">
             <h3>Top pages</h3>
           </OuiTitle>
@@ -347,7 +347,7 @@ const WebTrafficDashboard = () => (
         </OuiPanel>
       </OuiFlexItem>
       <OuiFlexItem>
-        <OuiPanel paddingSize="m" hasShadow={false} hasBorder>
+        <OuiPanel paddingSize="l" hasShadow={false} hasBorder={false}>
           <OuiTitle size="xs">
             <h3>Traffic sources</h3>
           </OuiTitle>
@@ -379,11 +379,11 @@ const WebTrafficDashboard = () => (
       </OuiFlexItem>
     </OuiFlexGroup>
 
-    <OuiSpacer size="m" />
+    <OuiSpacer size="l" />
 
     <OuiFlexGroup gutterSize="m">
       <OuiFlexItem>
-        <OuiPanel paddingSize="m" hasShadow={false} hasBorder>
+        <OuiPanel paddingSize="l" hasShadow={false} hasBorder={false}>
           <OuiTitle size="xs">
             <h3>Geographic distribution</h3>
           </OuiTitle>
@@ -417,7 +417,7 @@ const WebTrafficDashboard = () => (
         </OuiPanel>
       </OuiFlexItem>
       <OuiFlexItem>
-        <OuiPanel paddingSize="m" hasShadow={false} hasBorder>
+        <OuiPanel paddingSize="l" hasShadow={false} hasBorder={false}>
           <OuiTitle size="xs">
             <h3>Browser &amp; device</h3>
           </OuiTitle>
@@ -451,7 +451,7 @@ const ApiPerformanceDashboard = () => (
   <div className="dashboardPage__content">
     <OuiFlexGroup gutterSize="m">
       <OuiFlexItem>
-        <OuiPanel paddingSize="m" hasShadow={false} hasBorder>
+        <OuiPanel paddingSize="l" hasShadow={false} hasBorder={false}>
           <OuiStat
             title="142ms"
             description="P50 latency"
@@ -461,7 +461,7 @@ const ApiPerformanceDashboard = () => (
         </OuiPanel>
       </OuiFlexItem>
       <OuiFlexItem>
-        <OuiPanel paddingSize="m" hasShadow={false} hasBorder>
+        <OuiPanel paddingSize="l" hasShadow={false} hasBorder={false}>
           <OuiStat
             title="487ms"
             description="P95 latency"
@@ -471,7 +471,7 @@ const ApiPerformanceDashboard = () => (
         </OuiPanel>
       </OuiFlexItem>
       <OuiFlexItem>
-        <OuiPanel paddingSize="m" hasShadow={false} hasBorder>
+        <OuiPanel paddingSize="l" hasShadow={false} hasBorder={false}>
           <OuiStat
             title="1.2%"
             description="Error rate"
@@ -481,17 +481,17 @@ const ApiPerformanceDashboard = () => (
         </OuiPanel>
       </OuiFlexItem>
       <OuiFlexItem>
-        <OuiPanel paddingSize="m" hasShadow={false} hasBorder>
+        <OuiPanel paddingSize="l" hasShadow={false} hasBorder={false}>
           <OuiStat title="18.4K" description="Requests/min" titleSize="m" />
         </OuiPanel>
       </OuiFlexItem>
     </OuiFlexGroup>
 
-    <OuiSpacer size="m" />
+    <OuiSpacer size="l" />
 
     <OuiFlexGroup gutterSize="m">
       <OuiFlexItem grow={2}>
-        <OuiPanel paddingSize="m" hasShadow={false} hasBorder>
+        <OuiPanel paddingSize="l" hasShadow={false} hasBorder={false}>
           <OuiTitle size="xs">
             <h3>Endpoint performance</h3>
           </OuiTitle>
@@ -583,11 +583,11 @@ const ApiPerformanceDashboard = () => (
       </OuiFlexItem>
     </OuiFlexGroup>
 
-    <OuiSpacer size="m" />
+    <OuiSpacer size="l" />
 
     <OuiFlexGroup gutterSize="m">
       <OuiFlexItem>
-        <OuiPanel paddingSize="m" hasShadow={false} hasBorder>
+        <OuiPanel paddingSize="l" hasShadow={false} hasBorder={false}>
           <OuiTitle size="xs">
             <h3>Error breakdown</h3>
           </OuiTitle>
@@ -657,7 +657,7 @@ const ApiPerformanceDashboard = () => (
         </OuiPanel>
       </OuiFlexItem>
       <OuiFlexItem>
-        <OuiPanel paddingSize="m" hasShadow={false} hasBorder>
+        <OuiPanel paddingSize="l" hasShadow={false} hasBorder={false}>
           <OuiTitle size="xs">
             <h3>Downstream dependencies</h3>
           </OuiTitle>
@@ -743,8 +743,8 @@ export const DashboardsPage = ({
   isAskAiPanelOpen,
   onAskAiToggle,
 }) => {
-  const currentTitle =
-    (selectedItem && DASHBOARD_TITLES[selectedItem]) || 'Dashboards';
+  const dashName = (selectedItem && DASHBOARD_TITLES[selectedItem]) || 'System overview';
+  const currentTitle = `Dashboard: ${dashName}`;
 
   const renderDashboard = () => {
     switch (selectedItem) {
@@ -787,7 +787,7 @@ export const DashboardsPage = ({
         style={{
           flex: 1,
           overflow: 'auto',
-          padding: '16px',
+          padding: '24px 32px',
         }}>
         {renderDashboard()}
       </div>

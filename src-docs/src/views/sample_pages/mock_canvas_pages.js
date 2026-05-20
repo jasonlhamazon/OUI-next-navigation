@@ -758,37 +758,31 @@ export const DashboardPageMock = () => (
             <h3>Recent events</h3>
           </OuiTitle>
           <OuiSpacer size="s" />
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0' }}>
               <OuiIcon type="alert" color="danger" size="s" />
               <div>
-                <OuiText size="xs">
-                  <strong>Pool saturated</strong>
-                </OuiText>
+                <OuiText size="xs">Pool saturated</OuiText>
                 <OuiText size="xs" color="subdued">
                   3 of 4 pods · 15 min ago
                 </OuiText>
               </div>
             </div>
-            <OuiHorizontalRule margin="xs" />
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+            <div style={{ height: 1, background: 'currentColor', opacity: 0.1 }} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0' }}>
               <OuiIcon type="alert" color="warning" size="s" />
               <div>
-                <OuiText size="xs">
-                  <strong>Acquire wait &gt; 1s</strong>
-                </OuiText>
+                <OuiText size="xs">Acquire wait &gt; 1s</OuiText>
                 <OuiText size="xs" color="subdued">
                   payment-7f8b9-xk2lp · 20 min ago
                 </OuiText>
               </div>
             </div>
-            <OuiHorizontalRule margin="xs" />
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+            <div style={{ height: 1, background: 'currentColor', opacity: 0.1 }} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0' }}>
               <OuiIcon type="alert" color="warning" size="s" />
               <div>
-                <OuiText size="xs">
-                  <strong>Pool utilization &gt; 80%</strong>
-                </OuiText>
+                <OuiText size="xs">Pool utilization &gt; 80%</OuiText>
                 <OuiText size="xs" color="subdued">
                   All pods · 32 min ago
                 </OuiText>

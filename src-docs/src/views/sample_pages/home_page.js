@@ -12,21 +12,35 @@
 import React, { useState } from 'react';
 
 import {
-  OuiTitle,
-  OuiCompressedTextArea,
   OuiButtonIcon,
-  OuiListGroup,
-  OuiListGroupItem,
-  OuiText,
-  OuiSpacer,
+  OuiCompressedTextArea,
+  OuiIcon,
 } from '../../../../src/components';
 
-import { DEFAULT_THREADS } from './sample_pages_left_nav';
+const CIRCLES = [
+  { icon: 'starEmpty', label: 'Favorites', badge: '7', badgeKind: 'default', active: true },
+  { icon: 'navAlerting', label: 'Alerts', badge: '7', badgeKind: 'danger' },
+  { icon: 'navDashboards', label: 'Dashboards' },
+  { icon: 'navDiscover', label: 'Discover (log)', badge: '3', badgeKind: 'primary' },
+  { icon: 'visArea', label: 'Discover (metric)', badge: '2', badgeKind: 'primary' },
+  { icon: 'navServiceMap', label: 'Application Map' },
+  { icon: 'apmTrace', label: 'Application Traces' },
+  { icon: 'apps', label: 'Application Services' },
+  { icon: 'grid', label: 'More' },
+];
+
+const FAVORITES = [
+  { name: 'System overview', meta: 'Dashboard · 5 min ago', icon: 'visArea', kind: 'default' },
+  { name: 'Error rate by service', meta: 'Saved log · source=logs | where level="ERROR"', icon: 'navDiscover', kind: 'default' },
+  { name: 'CPU utilization', meta: 'Saved metric · stats avg(cpu) by host', icon: 'visArea', kind: 'default' },
+  { name: 'Payment service P99 latency breach', meta: 'Alert · Critical · 15 min ago', icon: 'navAlerting', kind: 'alert' },
+  { name: 'API performance', meta: 'Dashboard · Updated 30 min ago', icon: 'visArea', kind: 'default' },
+  { name: 'Checkout funnel', meta: 'Dashboard · Updated 1 h ago', icon: 'visArea', kind: 'default' },
+  { name: 'Memory pressure by host', meta: 'Saved metric · stats avg(mem) by host', icon: 'visArea', kind: 'default' },
+];
 
 export const HomePage = ({ onNavigate, onContinueAsThread }) => {
   const [query, setQuery] = useState('');
-  const [attentionOpen, setAttentionOpen] = useState(true);
-  const [activeOpen, setActiveOpen] = useState(true);
 
   const MOCK_RESPONSE =
     'I looked into this and found a few things worth noting.\n\n**Summary**\n\n- The service metrics show a gradual increase in P99 latency over the past 6 hours.\n- Error rates remain within acceptable thresholds but are trending upward.\n- No recent deployments correlate with the change.\n\nI recommend checking the downstream dependency health and reviewing recent config changes in the environment.';
@@ -47,139 +61,99 @@ export const HomePage = ({ onNavigate, onContinueAsThread }) => {
   };
 
   return (
-    <div
-      style={{
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        paddingTop: 120,
-      }}>
-      <OuiTitle size="l">
-        <h1 style={{ margin: 0 }}>Welcome to OpenSearch</h1>
-      </OuiTitle>
+    <div className="homePage__v4">
+      <div className="homePage__v4Content">
+        {/* Headline */}
+        <div className="homePage__v4Headline">
+          <h1 className="homePage__v4Title">
+            Welcome, John.
+          </h1>
+          <span className="homePage__v4Subtitle">
+            What should we look into together?
+          </span>
+        </div>
 
-      <div style={{ width: '100%', maxWidth: 600, marginTop: 24 }}>
-        <div className="threadPage__inputWrapper">
-          <OuiCompressedTextArea
-            placeholder="Ask a question..."
-            fullWidth
-            resize="none"
-            rows={3}
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={handleKeyDown}
-            className="threadPage__textarea"
-          />
-          <div className="threadPage__inputActions">
-            <OuiButtonIcon
-              iconType="plus"
-              aria-label="Add attachment"
-              size="s"
-              color="text"
+        {/* Input */}
+        <div className="homePage__v4InputWrap">
+          <div className="homePage__v4InputField">
+            <OuiCompressedTextArea
+              placeholder="Ask anything. Type / for actions, @ to reference a service."
+              fullWidth
+              resize="none"
+              rows={3}
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={handleKeyDown}
+              className="homePage__v4Textarea"
             />
-            <OuiButtonIcon
-              iconType="sortUp"
-              aria-label="Send message"
-              display="fill"
-              size="s"
-              isDisabled={!query.trim()}
-              onClick={handleSend}
-            />
+            <div className="homePage__v4InputActions">
+              <OuiButtonIcon
+                iconType="plus"
+                aria-label="Add attachment"
+                size="s"
+                color="text"
+              />
+              <OuiButtonIcon
+                iconType="sortUp"
+                aria-label="Send message"
+                display="fill"
+                size="s"
+                isDisabled={!query.trim()}
+                onClick={handleSend}
+              />
+            </div>
           </div>
         </div>
 
-        <OuiSpacer size="m" />
-
-        <div className="homePage__threadList">
-          <div className="samplePagesLeftNav__navGroup">
-            <div className="samplePagesLeftNav__navGroupHeader">
-              <span className="samplePagesLeftNav__navGroupLabel">
-                Needs attention
-              </span>
-              <OuiButtonIcon
-                iconType={attentionOpen ? 'minus' : 'plus'}
-                aria-label={
-                  attentionOpen
-                    ? 'Collapse Needs attention'
-                    : 'Expand Needs attention'
-                }
-                size="xs"
-                color="text"
-                display="empty"
-                onClick={() => setAttentionOpen((o) => !o)}
-              />
+        {/* Circles row */}
+        <div className="homePage__v4Circles">
+          {CIRCLES.map((c) => (
+            <div
+              key={c.label}
+              className={`homePage__v4CircleItem${c.active ? ' homePage__v4CircleItem--active' : ''}`}
+              onClick={() => onNavigate && onNavigate('page', c.label.toLowerCase())}>
+              <div className={`homePage__v4CircleIcon${c.active ? ' homePage__v4CircleIcon--active' : ''}`}>
+                <OuiIcon type={c.icon} size="m" />
+                {c.badge && (
+                  <span className={`homePage__v4Badge homePage__v4Badge--${c.badgeKind}`}>
+                    {c.badge}
+                  </span>
+                )}
+              </div>
+              <span className="homePage__v4CircleLabel">{c.label}</span>
             </div>
-            {attentionOpen && (
-              <OuiListGroup gutterSize="none" maxWidth={false}>
-                {DEFAULT_THREADS.slice(0, 2).map((thread) => (
-                  <OuiListGroupItem
-                    key={thread.key}
-                    label={
-                      <div>
-                        <OuiText size="s">
-                          <strong>{thread.title}</strong>
-                        </OuiText>
-                        <OuiText size="xs" color="subdued">
-                          {thread.subtitle}
-                        </OuiText>
-                      </div>
-                    }
-                    onClick={() =>
-                      onNavigate && onNavigate('thread', thread.key)
-                    }
-                    extraAction={{
-                      iconType: 'boxesHorizontal',
-                      'aria-label': 'More actions',
-                      onClick: (e) => e.stopPropagation(),
-                    }}
-                  />
-                ))}
-              </OuiListGroup>
-            )}
+          ))}
+        </div>
+
+        {/* Favorites list */}
+        <div className="homePage__v4Favorites">
+          <div className="homePage__v4FavoritesHeader">
+            <span className="homePage__v4FavoritesTitle">
+              Favorites <span className="homePage__v4FavoritesCount">· {FAVORITES.length} items</span>
+            </span>
+            <button type="button" className="homePage__v4FilterButton">
+              <OuiIcon type="filter" size="s" />
+              <span>All types</span>
+              <OuiIcon type="arrowDown" size="s" />
+            </button>
           </div>
 
-          <OuiSpacer size="s" />
-
-          <div className="samplePagesLeftNav__navGroup">
-            <div className="samplePagesLeftNav__navGroupHeader">
-              <span className="samplePagesLeftNav__navGroupLabel">Active</span>
-              <OuiButtonIcon
-                iconType={activeOpen ? 'minus' : 'plus'}
-                aria-label={activeOpen ? 'Collapse Active' : 'Expand Active'}
-                size="xs"
-                color="text"
-                display="empty"
-                onClick={() => setActiveOpen((o) => !o)}
-              />
-            </div>
-            {activeOpen && (
-              <OuiListGroup gutterSize="none" maxWidth={false}>
-                {DEFAULT_THREADS.slice(2).map((thread) => (
-                  <OuiListGroupItem
-                    key={thread.key}
-                    label={
-                      <div>
-                        <OuiText size="s">
-                          <strong>{thread.title}</strong>
-                        </OuiText>
-                        <OuiText size="xs" color="subdued">
-                          {thread.subtitle}
-                        </OuiText>
-                      </div>
-                    }
-                    onClick={() =>
-                      onNavigate && onNavigate('thread', thread.key)
-                    }
-                    extraAction={{
-                      iconType: 'boxesHorizontal',
-                      'aria-label': 'More actions',
-                      onClick: (e) => e.stopPropagation(),
-                    }}
-                  />
-                ))}
-              </OuiListGroup>
-            )}
+          <div className="homePage__v4FavoritesList">
+            {FAVORITES.map((row) => (
+              <button
+                key={row.name}
+                type="button"
+                className="homePage__v4FavoritesItem"
+                onClick={() => onNavigate && onNavigate('page', 'dashboards')}>
+                <div className="homePage__v4FavoritesItemText">
+                  <span className="homePage__v4FavoritesItemName">{row.name}</span>
+                  <span className="homePage__v4FavoritesItemMeta">{row.meta}</span>
+                </div>
+                <div className={`homePage__v4FavoritesItemIcon homePage__v4FavoritesItemIcon--${row.kind}`}>
+                  <OuiIcon type={row.icon} size="s" />
+                </div>
+              </button>
+            ))}
           </div>
         </div>
       </div>

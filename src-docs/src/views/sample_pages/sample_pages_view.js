@@ -56,6 +56,7 @@ import {
 
 // Session-based navigation imports
 import { SessionLeftNav } from './session_left_nav';
+import { AnimatedSidebar } from './animated_sidebar';
 import { SessionContainer } from './session_container';
 import { SessionList } from './session_list';
 import { EmptySessionPage } from './empty_session_page';
@@ -1469,23 +1470,38 @@ export const SamplePagesView = () => {
  */
 function initializeSessionState() {
   // Always start fresh — no persistence
-  // Include the Latency Spike Investigation demo session in the list
-  // but land on a new empty session
-  const emptySession = {
-    id: `session-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
-    threadKey: null,
+  // No empty "New Session" on first load — sessions are created when user types and hits enter
+  const now = Date.now();
+  const MINUTE = 60000;
+  const HOUR = 3600000;
+  const DAY = 86400000;
+
+  const mockSessions = [
+    { title: 'CPU Spike Analysis', createdAt: now - 25 * MINUTE, tabs: ['metrics'] },
+    { title: 'Dashboard Layout Review', createdAt: now - 2 * HOUR, tabs: ['dashboards'] },
+    { title: 'Log Pattern Clustering', createdAt: now - 4 * HOUR, tabs: ['logs', 'discover'] },
+    { title: 'Alert Rule Tuning', createdAt: now - 6 * HOUR, tabs: ['alerts'] },
+    { title: 'Trace Waterfall Debug', createdAt: now - 12 * HOUR, tabs: ['traces', 'app-map'] },
+    { title: 'Memory Leak Investigation', createdAt: now - 1 * DAY, tabs: ['metrics', 'logs'] },
+    { title: 'Service Dependency Mapping', createdAt: now - 2 * DAY, tabs: ['app-services', 'app-map'] },
+    { title: 'Error Rate Correlation', createdAt: now - 3 * DAY, tabs: ['logs', 'alerts', 'dashboards'] },
+    { title: 'Deployment Impact Review', createdAt: now - 4 * DAY, tabs: ['metrics'] },
+    { title: 'Capacity Planning', createdAt: now - 5 * DAY, tabs: ['dashboards', 'metrics'] },
+  ].map((s, i) => ({
+    id: `session-mock-${i}-${Math.random().toString(36).slice(2, 9)}`,
+    threadKey: i < 3 ? `thread-${i}` : null,
     pendingThread: null,
-    title: 'New Session',
+    title: s.title,
     threadPanelState: 'minimized',
     threadPanelWidth: 30,
-    tabs: [],
-    activeTabId: null,
-    createdAt: Date.now(),
-  };
+    tabs: s.tabs.map((pageKey, ti) => ({ id: `tab-${i}-${ti}`, pageKey, title: pageKey })),
+    activeTabId: s.tabs.length > 0 ? `tab-${i}-0` : null,
+    createdAt: s.createdAt,
+  }));
 
   return {
-    sessions: [emptySession, LATENCY_SPIKE_SESSION],
-    activeSessionId: emptySession.id,
+    sessions: [LATENCY_SPIKE_SESSION, ...mockSessions],
+    activeSessionId: null,
     version: 1,
   };
 }
@@ -1500,6 +1516,9 @@ export const SessionPagesView = () => {
   // Session state: sessions array + activeSessionId
   const [sessionState, setSessionState] = useState(initializeSessionState);
 
+  // Animated sidebar collapsed state
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
   // Active view: 'session' (show active session) or 'session-list' (browse all sessions)
   const [activeView, setActiveView] = useState('session');
 
@@ -1510,12 +1529,12 @@ export const SessionPagesView = () => {
 
   // --- Left Nav handlers ---
 
-  /** Plus_Button: create a new session and navigate into it */
+  /** Plus_Button: go to empty session page (session created on first input) */
   const handleCreateSession = useCallback(() => {
-    setSessionState((prev) => {
-      const next = createSession(prev);
-      return next;
-    });
+    setSessionState((prev) => ({
+      ...prev,
+      activeSessionId: null,
+    }));
     setActiveView('session');
   }, []);
 
@@ -1557,7 +1576,6 @@ export const SessionPagesView = () => {
   /** Start a new thread from the empty session page */
   const handleStartThread = useCallback((prompt) => {
     setSessionState((prev) => {
-      if (!prev.activeSessionId) return prev;
       const threadKey = `thread-${Date.now()}-${Math.random()
         .toString(36)
         .slice(2, 9)}`;
@@ -1568,11 +1586,34 @@ export const SessionPagesView = () => {
           : [],
         sourcePageTitle: null,
       };
+      const sessionTitle = prompt ? prompt.slice(0, 40) : 'New Thread';
+
+      // If no active session, create one
+      if (!prev.activeSessionId) {
+        const newSession = {
+          id: `session-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
+          threadKey,
+          pendingThread,
+          title: sessionTitle,
+          threadPanelState: 'full-screen',
+          threadPanelWidth: 30,
+          tabs: [],
+          activeTabId: null,
+          createdAt: Date.now(),
+        };
+        return {
+          ...prev,
+          sessions: [newSession, ...prev.sessions],
+          activeSessionId: newSession.id,
+        };
+      }
+
+      // Otherwise update existing active session
       return updateSession(prev, prev.activeSessionId, {
         threadKey,
         pendingThread,
         threadPanelState: 'full-screen',
-        title: prompt ? prompt.slice(0, 40) : 'New Thread',
+        title: sessionTitle,
       });
     });
   }, []);
@@ -1609,7 +1650,16 @@ export const SessionPagesView = () => {
     }
 
     if (!activeSession) {
-      return null;
+      // No active session yet — show empty session page for new input
+      return (
+        <EmptySessionPage
+          onStartThread={handleStartThread}
+          onOpenPage={handleOpenPage}
+          recentItems={[]}
+          favoriteItems={[]}
+          systemAlert={null}
+        />
+      );
     }
 
     if (isEmptySession) {
@@ -1643,11 +1693,14 @@ export const SessionPagesView = () => {
         right: 0,
         bottom: 0,
       }}>
-      <SessionLeftNav
-        sessionCount={sessionState.sessions.length}
+      <AnimatedSidebar
+        collapsed={sidebarCollapsed}
+        setCollapsed={setSidebarCollapsed}
         onCreateSession={handleCreateSession}
         onBrowseSessions={handleBrowseSessions}
-        activeView={activeView}
+        sessions={sessionState.sessions}
+        activeSessionId={sessionState.activeSessionId}
+        onSelectSession={handleSelectSession}
       />
       <div
         style={{

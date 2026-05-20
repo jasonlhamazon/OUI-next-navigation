@@ -115,6 +115,22 @@ export const GuidePageHeader: React.FunctionComponent<{}> = () => {
     );
   }
 
+  function renderMarketingPage() {
+    const handleClick = () => {
+      window.open(`${window.location.origin}${window.location.pathname.replace(/\/[^/]*$/, '/')}marketing.html`, '_blank');
+    };
+    return (
+      <OuiButton
+        size="s"
+        onClick={handleClick}
+        color="ghost"
+        minWidth={0}
+        style={{ marginRight: 16 }}>
+        Marketing Page
+      </OuiButton>
+    );
+  }
+
   const [mobilePopoverIsOpen, setMobilePopoverIsOpen] = useState(false);
 
   function renderMobileMenu() {
@@ -135,6 +151,7 @@ export const GuidePageHeader: React.FunctionComponent<{}> = () => {
         <div className="guideOptionsPopover">{renderGithub()}</div>
         <div className="guideOptionsPopover">{renderFigma()}</div>
         <div className="guideOptionsPopover">{renderSamplePages()}</div>
+        <div className="guideOptionsPopover">{renderMarketingPage()}</div>
       </OuiPopover>
     );
   }
@@ -142,6 +159,7 @@ export const GuidePageHeader: React.FunctionComponent<{}> = () => {
   const rightSideItems = isMobileSize
     ? [<GuideThemeSelector />, renderMobileMenu()]
     : [
+        renderMarketingPage(),
         renderSamplePages(),
         <GuideThemeSelector />,
         renderGithub(),

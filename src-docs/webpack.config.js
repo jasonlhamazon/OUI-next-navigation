@@ -138,6 +138,12 @@ const webpackConfig = {
       showErrors: true,
     }),
 
+    new HtmlWebpackPlugin({
+      template: 'marketing.html',
+      filename: 'marketing.html',
+      inject: false,
+    }),
+
     new CircularDependencyPlugin({
       exclude: /node_modules/,
       failOnError: true,
@@ -160,7 +166,12 @@ const webpackConfig = {
         host: '0.0.0.0',
         allowedHosts: 'all',
         port: 8030,
-        historyApiFallback: true,
+        historyApiFallback: {
+          rewrites: [
+            { from: /^\/marketing\.html$/, to: '/marketing.html' },
+            { from: /./, to: '/index.html' },
+          ],
+        },
         // prevent file watching while running on CI
         // /app/ represents the entire docker environment
         watchFiles: isPuppeteer
