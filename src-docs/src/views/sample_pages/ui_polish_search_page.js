@@ -75,6 +75,11 @@ export const UiPolishSearchPage = ({ onSelectPage, initialQuery = '' }) => {
   const [searchQuery, setSearchQuery] = useState(initialQuery);
   const [activeTab, setActiveTab] = useState('all');
 
+  // Sync initialQuery when it changes (e.g. navigating from home with a query)
+  React.useEffect(() => {
+    if (initialQuery) setSearchQuery(initialQuery);
+  }, [initialQuery]);
+
   const filteredItems = LIBRARY_OBJECTS.filter((item) => {
     const matchesSearch = !searchQuery.trim() ||
       item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||

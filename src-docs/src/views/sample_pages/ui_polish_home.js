@@ -122,6 +122,7 @@ export const UiPolishPage = () => {
   }, []);
 
   const handleStartThread = useCallback((prompt) => {
+    setActiveView('session');
     setSessionState((prev) => {
       const threadKey = `thread-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
       const pendingThread = {
@@ -213,10 +214,7 @@ export const UiPolishPage = () => {
     if (!activeSession || isEmptySession) {
       return (
         <UiPolishEmptySession
-          onStartThread={(prompt) => {
-            setSearchQuery(prompt || '');
-            setActiveView('library');
-          }}
+          onStartThread={handleStartThread}
           onOpenPage={handleOpenPage}
           onViewSession={() => handleSelectSession('latency-spike-session')}
           onStartInvestigation={() => {}}

@@ -9,7 +9,8 @@
  * GitHub history for details.
  */
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useContext } from 'react';
+import { ThemeContext } from '../../components/with_theme';
 
 import {
   OuiButtonIcon,
@@ -855,6 +856,34 @@ const renderSingleAttachment = (att, idx, onViewAsPage) => {
     );
   }
   return null;
+};
+
+// Thinking indicator — B3 guideline: small mascot (16px squint) with shimmer
+const ThinkingIndicator = () => {
+  return (
+    <div className="threadPage__thinking">
+      <div className="threadPage__thinkingMascot" style={{ width: 16, height: 16, flexShrink: 0 }}>
+        <svg width="16" height="16" viewBox="0 0 80 80" fill="none">
+          <defs>
+            <linearGradient id="think_g" x1="40" y1="80" x2="40" y2="0" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#153A5A" />
+              <stop offset="1" stopColor="#14558E" />
+            </linearGradient>
+          </defs>
+          <circle cx="40" cy="40" r="39.5" fill="url(#think_g)" />
+          <circle cx="32" cy="38" r="3.5" fill="#fff" />
+          <circle cx="48" cy="38" r="3.5" fill="#fff" />
+        </svg>
+      </div>
+      <div className="threadPage__thinkingContent">
+        <div className="threadPage__thinkingShimmer">
+          <div className="threadPage__thinkingShimmerLine threadPage__thinkingShimmerLine--1" />
+          <div className="threadPage__thinkingShimmerLine threadPage__thinkingShimmerLine--2" />
+          <div className="threadPage__thinkingShimmerLine threadPage__thinkingShimmerLine--3" />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 // Renders a single assistant response (left-aligned, plain text + feedback)
@@ -1897,7 +1926,7 @@ export const ThreadPage = ({
                 />
               );
             })}
-            {isTyping && null}
+            {isTyping && <ThinkingIndicator />}
           </div>
 
           {/* Input area — textarea with buttons inside at bottom */}
