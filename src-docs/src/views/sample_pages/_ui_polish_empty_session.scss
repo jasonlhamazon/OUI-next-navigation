@@ -32,7 +32,6 @@
   overflow: hidden;
   overflow-y: auto;
   position: relative;
-  background-color: $ouiPageBackgroundColor;
   background-image:
     linear-gradient(to right, rgba(46, 74, 143, 0.04) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(46, 74, 143, 0.04) 1px, transparent 1px),
@@ -44,20 +43,7 @@
     8px 8px,
     8px 8px;
   background-position: 0 0;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    background:
-      linear-gradient(to right, $ouiPageBackgroundColor 0px, transparent 20px),
-      linear-gradient(to left, $ouiPageBackgroundColor 0px, transparent 20px);
-    z-index: 0;
-  }
+  background-attachment: fixed;
 }
 
 // Header / Agent identity + greeting
@@ -356,7 +342,9 @@
 
 .uiPolish__inputCard {
   position: relative;
-  background: $ouiColorEmptyShade;
+  background: rgba($ouiColorEmptyShade, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid $ouiColorPrimary;
   border-radius: 22px;
   padding: 24px 28px 20px;
@@ -366,6 +354,7 @@
   justify-content: space-between;
   transform: translateY(-1.5px);
   animation: inputPulseHalo 2.4s ease-in-out infinite;
+  z-index: 1;
 }
 
 @keyframes inputPulseHalo {

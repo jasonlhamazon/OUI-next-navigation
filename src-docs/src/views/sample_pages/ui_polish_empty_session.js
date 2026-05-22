@@ -88,7 +88,7 @@ const CHIP_DATA = {
       icon: 'user',
       sessionId: 'error-rate-spike-session',
       source: 'team',
-      sharedBy: 'Sichen',
+      sharedBy: 'Sicheng L',
       severity: 'normal',
       priority: 'P2',
       service: 'checkout-svc',
@@ -589,7 +589,7 @@ export const UiPolishEmptySession = ({
               <h1 className="uiPolish__heroTitle">Good morning, John</h1>
               <p className="uiPolish__heroSub">
                 <span className="uiPolish__heroSubBold">All 247 services steady.</span>{' '}
-                <span className="uiPolish__heroSubLight">2 findings to review.</span>
+                <span className="uiPolish__heroSubLight">2 activities to review.</span>
               </p>
             </div>
           </div>
@@ -666,7 +666,7 @@ export const UiPolishEmptySession = ({
                     <>
                       <div className="uiPolish__findingsHeader">
                         <span className="uiPolish__findingsLabel">
-                          // FROM YOUR AGENT — {String(visibleFindings.length).padStart(2, '0')} FINDING{visibleFindings.length === 1 ? '' : 'S'}
+                          // ACTIVITY — {String(visibleFindings.length).padStart(2, '0')}
                         </span>
                         <button type="button" className="uiPolish__markAllRead" onClick={() => {
                           CHIP_DATA.activity.forEach((item) => setDismissedItems((prev) => new Set([...prev, item.key])));
@@ -691,7 +691,7 @@ export const UiPolishEmptySession = ({
                                   </span>
                                 ) : (
                                   <span className="uiPolish__findingDot uiPolish__findingDot--alert">
-                                    {(item.sharedBy || 'T')[0]}
+                                    {item.sharedBy ? item.sharedBy.split(' ').map(w => w[0]).join('') : 'T'}
                                   </span>
                                 )}
                                 {item.severity === 'alert' ? (
@@ -702,7 +702,7 @@ export const UiPolishEmptySession = ({
                                 <span className="uiPolish__findingChip uiPolish__findingChip--service">{item.service}</span>
                                 <span className="uiPolish__findingSource">
                                   {item.source === 'ai' ? (
-                                    <>Started <strong>{item.age}</strong>, <strong style={{ color: item.severity === 'alert' ? '#C53961' : '#A8761F' }}>{item.trend}</strong> on {item.scope} · <strong>{item.confidence}% confidence</strong></>
+                                    <>Started <strong>{item.age}</strong> by <strong>Olly</strong>, <strong style={{ color: item.severity === 'alert' ? '#C53961' : '#A8761F' }}>{item.trend}</strong> on {item.scope} · <strong>{item.confidence}% confidence</strong></>
                                   ) : (
                                     <>Shared <strong>{item.age}</strong> by <strong>{item.sharedBy}</strong> · {item.detail}</>
                                   )}

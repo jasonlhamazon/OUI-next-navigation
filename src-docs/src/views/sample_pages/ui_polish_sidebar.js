@@ -175,9 +175,9 @@ function NavRail({ onExpand, spinKey, dark, navPopover, openNavPopover, closeNav
               <OuiButtonIcon
                 iconType="wsSelector"
                 aria-label="Workspace"
-                color="text"
+                color="subdued"
                 display="empty"
-                size="xs"
+                size="s"
               />
             }
             isOpen={navPopover === 'workspace-footer'}
@@ -204,9 +204,9 @@ function NavRail({ onExpand, spinKey, dark, navPopover, openNavPopover, closeNav
             <OuiButtonIcon
               iconType="navDevtools"
               aria-label="Developer tools"
-              color="text"
+              color="subdued"
               display="empty"
-              size="xs"
+              size="s"
               onClick={() => {}}
             />
           </OuiToolTip>
@@ -222,9 +222,9 @@ function NavRail({ onExpand, spinKey, dark, navPopover, openNavPopover, closeNav
               <OuiButtonIcon
                 iconType="gear"
                 aria-label="Settings"
-                color="text"
+                color="subdued"
                 display="empty"
-                size="xs"
+                size="s"
               />
             }
             isOpen={navPopover === 'settings-footer'}
@@ -316,8 +316,9 @@ function formatTime(timestamp) {
 
 function NavPanel({ onCollapse, spinKey, dark, navPopover, openNavPopover, closeNavPopover, setNavPopover, themeContext, appearanceSelection, setAppearanceSelection, onCreateSession, onBrowseSessions, onSearch, sessions, activeSessionId, onSelectSession }) {
   const t = dark ? DARK : LIGHT;
+  const [scrolled, setScrolled] = React.useState(false);
 
-  const recents = (sessions || []).slice(0, 6).map((s) => ({
+  const recents = (sessions || []).map((s) => ({
     id: s.id,
     name: s.title || 'New Session',
     meta: [formatTime(s.createdAt), ...(s.tabs.length > 0 ? [`${s.tabs.length} tab${s.tabs.length > 1 ? 's' : ''}`] : [])],
@@ -344,13 +345,13 @@ function NavPanel({ onCollapse, spinKey, dark, navPopover, openNavPopover, close
       </div>
 
       {/* Sticky top actions */}
-      <div style={{ padding: '2px 8px 4px', flexShrink: 0 }}>
+      <div style={{ padding: '2px 8px 4px', flexShrink: 0, borderBottom: scrolled ? `1px solid ${t.dividerPanel}` : '1px solid transparent', transition: 'border-color 150ms ease' }}>
         <PanelItem icon="plus" label="New session" t={t} onClick={onCreateSession} />
         <PanelItem icon="search" label="Search" t={t} onClick={onSearch} />
       </div>
 
       {/* Scrollable middle: All sessions, AI tools, Recent */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '0 8px', minHeight: 0 }}>
+      <div style={{ flex: 1, overflowY: 'auto', padding: '0 8px', minHeight: 0 }} onScroll={(e) => setScrolled(e.target.scrollTop > 0)}>
         <div style={{ padding: '2px 0 4px' }}>
           <PanelItem icon="chats2" label="All sessions" t={t} onClick={onBrowseSessions} />
         </div>
