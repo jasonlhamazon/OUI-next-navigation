@@ -1,0 +1,1633 @@
+/*!
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * The OpenSearch Contributors require contributions made to
+ * this file be licensed under the Apache-2.0 license or a
+ * compatible open source license.
+ *
+ * Modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
+ */
+
+.uiPolish {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  padding: 0;
+  background-color: $ouiPageBackgroundColor;
+}
+
+.uiPolish__panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  padding: clamp(48px, 5vw, 80px) clamp(32px, 6vw, 96px) 96px;
+  overflow: hidden;
+  overflow-y: auto;
+  position: relative;
+  background-color: $ouiPageBackgroundColor;
+  background-image:
+    linear-gradient(to right, rgba(46, 74, 143, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(46, 74, 143, 0.04) 1px, transparent 1px),
+    linear-gradient(to right, rgba(46, 74, 143, 0.015) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(46, 74, 143, 0.015) 1px, transparent 1px);
+  background-size:
+    32px 32px,
+    32px 32px,
+    8px 8px,
+    8px 8px;
+  background-position: 0 0;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(to right, $ouiPageBackgroundColor 0px, transparent 20px),
+      linear-gradient(to left, $ouiPageBackgroundColor 0px, transparent 20px);
+    z-index: 0;
+  }
+}
+
+// Header / Agent identity + greeting
+.uiPolish__header {
+  text-align: left;
+  width: 100%;
+  max-width: 720px;
+  margin-bottom: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.uiPolish__agentRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.uiPolish__agentAvatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+
+  .osmascot-svg {
+    filter: none !important;
+  }
+}
+
+.uiPolish__agentInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.uiPolish__agentName {
+  font-family: $ouiFontFamily;
+  font-size: 13px;
+  font-weight: 600;
+  color: $ouiTitleColor;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  line-height: 1.2;
+}
+
+.uiPolish__agentDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #2E8B6F;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background-color: #2E8B6F;
+    animation: orPulse 2.4s ease-out infinite;
+  }
+}
+
+@keyframes orPulse {
+  0% { transform: scale(1); opacity: 0.45; }
+  100% { transform: scale(2.8); opacity: 0; }
+}
+
+.uiPolish__agentLabel {
+  font-family: $ouiCodeFontFamily;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: $ouiColorMediumShade;
+  text-transform: uppercase;
+}
+
+.uiPolish__greeting {
+  font-family: $ouiFontFamily;
+  font-size: clamp(26px, 3vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  line-height: 1.15;
+  margin: 0;
+  max-width: 860px;
+}
+
+.uiPolish__greetingBold {
+  color: $ouiTitleColor;
+}
+
+.uiPolish__greetingLight {
+  font-family: $ouiFontFamily;
+  color: $ouiColorMediumShade;
+  font-weight: 500;
+}
+
+// Content container — constrains width
+.uiPolish__content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 24px;
+  width: 100%;
+  max-width: 720px;
+  position: relative;
+  z-index: 1;
+}
+
+// Alert callout (warning)
+.uiPolish__alertCallout {
+  display: flex;
+  gap: $ouiSize;
+  padding: $ouiSize;
+  border: 1px solid $ouiColorWarning;
+  border-radius: $ouiBorderRadius;
+  background-color: tintOrShade($ouiColorWarning, 90%, 80%);
+}
+
+.uiPolish__alertCalloutIcon {
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.uiPolish__alertCalloutBody {
+  display: flex;
+  flex-direction: column;
+  gap: $ouiSizeS;
+}
+
+.uiPolish__alertCalloutText {
+  font-size: $ouiFontSizeS;
+  color: $ouiTextColor;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.uiPolish__alertCalloutSubtext {
+  font-size: $ouiFontSizeXS;
+  color: $ouiColorMediumShade;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.uiPolish__alertCalloutActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $ouiSizeS;
+}
+
+.uiPolish__alertCalloutAction {
+  font-size: $ouiFontSizeXS;
+  font-weight: $ouiFontWeightMedium;
+  color: $ouiColorMediumShade;
+  background: none;
+  border: 1px solid $ouiBorderColor;
+  border-radius: $ouiBorderRadius;
+  padding: 4px $ouiSizeS;
+  cursor: pointer;
+  transition: background-color $ouiAnimSpeedFast ease-in-out;
+
+  &:hover {
+    background-color: $ouiFocusBackgroundColor;
+  }
+
+  &--primary {
+    color: $ouiColorPrimary;
+    border-color: $ouiColorPrimary;
+  }
+}
+
+// System Callout
+.uiPolish__callout {
+  display: flex;
+  width: 100%;
+  max-width: 848px;
+}
+
+.uiPolish__calloutBorder {
+  width: 2px;
+  flex-shrink: 0;
+  background-color: $ouiColorDanger;
+}
+
+.uiPolish__calloutContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  padding: 16px;
+  background-color: #f8e9e9;
+}
+
+.uiPolish__calloutText {
+  font-size: $ouiFontSizeXS;
+  color: $ouiTextColor;
+  margin: 0;
+}
+
+.uiPolish__calloutCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 4px 6px;
+  border: 1px solid $ouiColorDanger;
+  border-radius: 4px;
+  background: none;
+  color: $ouiColorDanger;
+  font-size: $ouiFontSizeS;
+  cursor: pointer;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 5px rgba(0, 0, 0, 0.05);
+  align-self: flex-start;
+
+  &:hover {
+    background-color: rgba($ouiColorDanger, 0.05);
+  }
+}
+
+// Dual-purpose input
+.uiPolish__inputWrap {
+  position: relative;
+  width: 100%;
+  margin-bottom: 36px;
+}
+
+@keyframes shimmerBorder {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+.uiPolish__inputField {
+  position: relative;
+}
+
+.uiPolish__inputCard {
+  position: relative;
+  background: $ouiColorEmptyShade;
+  border: 1px solid $ouiColorPrimary;
+  border-radius: 22px;
+  padding: 24px 28px 20px;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: translateY(-1.5px);
+  animation: inputPulseHalo 2.4s ease-in-out infinite;
+}
+
+@keyframes inputPulseHalo {
+  0%, 100% {
+    box-shadow:
+      0 0 0 3px rgba($ouiColorPrimary, 0.08),
+      0 10px 22px -16px rgba($ouiColorPrimary, 0.30),
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      0 14px 28px -16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1.5px);
+  }
+  50% {
+    box-shadow:
+      0 0 0 7px rgba($ouiColorPrimary, 0.13),
+      0 18px 36px -16px rgba($ouiColorPrimary, 0.35),
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      0 18px 36px -16px rgba(0, 0, 0, 0.10);
+    transform: translateY(-2.5px);
+  }
+}
+
+.uiPolish__inputPlaceholder {
+  font-family: $ouiFontFamily;
+  font-size: 12px;
+  line-height: 1.5;
+  color: $ouiColorMediumShade;
+  pointer-events: none;
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  right: 18px;
+}
+
+.uiPolish__inputHighlight {
+  font-family: $ouiCodeFontFamily;
+  color: $ouiColorPrimary;
+  font-weight: 600;
+}
+
+.uiPolish__inputCaret {
+  display: inline-block;
+  width: 1.5px;
+  height: 17px;
+  background: $ouiTitleColor;
+  vertical-align: -3px;
+  margin-right: 1px;
+  animation: caretBlink 1.05s steps(2) infinite;
+}
+
+@keyframes caretBlink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
+.uiPolish__textareaRaw {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: $ouiFontFamily;
+  font-size: 12px;
+  color: $ouiTitleColor;
+  background: transparent;
+  min-height: 24px;
+  line-height: 1.5;
+  padding: 0;
+  margin: 0;
+  caret-color: $ouiTitleColor;
+
+  &--empty {
+    caret-color: transparent;
+  }
+}
+
+// Plus (bottom-left) and send (bottom-right) inside the input card
+.uiPolish__inputActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 22px;
+}
+
+.uiPolish__inputPlus {
+  font-size: 15px;
+  color: $ouiColorMediumShade;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 150ms ease;
+
+  &:hover {
+    color: $ouiTextColor;
+  }
+}
+
+.uiPolish__inputHints {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.uiPolish__inputHintDot {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: $ouiColorMediumShade;
+  opacity: 0.5;
+}
+
+.uiPolish__inputHintCmd {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: $ouiColorMediumShade;
+  opacity: 0.6;
+}
+
+.uiPolish__sendButton {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: $ouiColorPrimary;
+  color: $ouiColorEmptyShade;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background-color 150ms ease, transform 150ms ease;
+
+  &:hover:not(:disabled) {
+    background: darken($ouiColorPrimary, 8%);
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  svg {
+    width: 11px;
+    height: 11px;
+  }
+}
+
+.uiPolish__suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background-color: $ouiColorEmptyShade;
+  border: 1px solid $ouiBorderColor;
+  border-top: none;
+  border-radius: 0 0 2px 2px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.uiPolish__suggestionItem {
+  display: flex;
+  align-items: center;
+  gap: $ouiSizeS;
+  width: 100%;
+  padding: $ouiSizeS $ouiSize;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: $ouiFontSizeS;
+  color: $ouiTextColor;
+
+  &:hover {
+    background-color: $ouiFocusBackgroundColor;
+  }
+}
+
+// Quick Access Row
+.uiPolish__quickAccess {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.uiPolish__quickAccessRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 64px;
+
+  &--expandable {
+    animation: quickAccessSlideDown 300ms ease-out;
+    overflow: hidden;
+  }
+}
+
+@keyframes quickAccessSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.uiPolish__quickAccessItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 64px;
+  cursor: pointer;
+}
+
+.uiPolish__quickAccessButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: $ouiBorderThin;
+  background-color: $ouiColorEmptyShade;
+  cursor: pointer;
+  padding: 24px;
+  transition: background-color 150ms ease-in-out;
+
+  &:hover {
+    background-color: $ouiColorLightestShade;
+  }
+}
+
+.uiPolish__quickAccessLabel {
+  font-size: $ouiFontSizeXS;
+  line-height: 18px;
+  color: $ouiTitleColor;
+  text-align: center;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+// More options dropdown
+.uiPolish__moreOptions {
+  margin-top: $ouiSizeS;
+  background-color: $ouiColorEmptyShade;
+  border: 1px solid $ouiBorderColor;
+  border-radius: 2px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: $ouiSizeXS 0;
+}
+
+.uiPolish__moreOptionItem {
+  display: flex;
+  align-items: center;
+  gap: $ouiSizeS;
+  width: 100%;
+  padding: $ouiSizeS $ouiSize;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: $ouiFontSizeS;
+  color: $ouiTextColor;
+
+  &:hover {
+    background-color: $ouiFocusBackgroundColor;
+  }
+}
+
+// Tabs section
+.uiPolish__tabs {
+  width: 100%;
+  max-width: 848px;
+}
+
+.uiPolish__tabHeaders {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 10px;
+}
+
+.uiPolish__tabHeader {
+  padding: 8px 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: $ouiFontSizeS;
+  font-weight: 700;
+  color: $ouiTextColor;
+  border-bottom: 2px solid transparent;
+
+  &:hover {
+    color: $ouiColorPrimary;
+  }
+
+  &--active {
+    color: $ouiColorPrimary;
+    border-bottom-color: $ouiColorPrimary;
+  }
+}
+
+.uiPolish__tabContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.uiPolish__tabs .ouiTabs--condensed {
+  margin-bottom: 12px;
+}
+
+.uiPolish__sectionTitle {
+  font-size: $ouiFontSizeS;
+  font-weight: 700;
+  color: $ouiTitleColor;
+  padding: 8px 0;
+  margin-bottom: 12px;
+}
+
+.uiPolish__emptyList {
+  text-align: center;
+  padding: $ouiSizeL 0;
+}
+
+.uiPolish__placeholderRow {
+  height: 60px;
+  background-color: #d9d9d9;
+  border-radius: 4px;
+}
+
+.uiPolish__itemList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.uiPolish__listItem {
+  display: flex;
+  align-items: center;
+  gap: $ouiSize;
+  width: 100%;
+  padding: 22px 28px;
+  border: 1px solid $ouiBorderColor;
+  border-left: 3px solid $ouiColorPrimary;
+  border-radius: 10px;
+  background-color: $ouiColorEmptyShade;
+  cursor: pointer;
+  text-align: left;
+  font-size: $ouiFontSizeS;
+  color: $ouiTextColor;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px $ouiFocusRingColor;
+  }
+
+  &--warning {
+    border-left-color: #C53961;
+    border-color: rgba(197, 57, 97, 0.30);
+  }
+
+  &--activity {
+    border: 1px solid rgba(197, 57, 97, 0.30);
+    border-left: 3px solid #C53961;
+    position: relative;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  &--activityLayout {
+    position: relative;
+    flex-direction: column;
+    align-items: stretch;
+    max-height: none;
+    overflow: visible;
+  }
+
+  &--dismissing {
+    opacity: 0;
+    transform: translateX(-100%);
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-color: transparent;
+    transition: transform 300ms ease-in, opacity 200ms ease-in, max-height 200ms 250ms ease-out, padding 200ms 250ms, margin 200ms 250ms, border-color 200ms 250ms;
+  }
+}
+
+.uiPolish__listItemClickable {
+  display: flex;
+  align-items: center;
+  gap: $ouiSize;
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+
+  .uiPolish__listItem--activityLayout & {
+    align-items: stretch;
+  }
+  font-size: $ouiFontSizeS;
+  color: $ouiTextColor;
+}
+
+.uiPolish__listItemDismiss {
+  font-size: $ouiFontSizeXS;
+  color: $ouiColorPrimary;
+  background: none;
+  border: 1px solid $ouiBorderColor;
+  border-radius: 999px;
+  padding: 4px 12px;
+  cursor: pointer;
+  flex-shrink: 0;
+  position: absolute;
+  top: $ouiSize;
+  right: $ouiSize;
+
+  &:hover {
+    background-color: $ouiFocusBackgroundColor;
+    border-color: $ouiColorPrimary;
+  }
+}
+
+.uiPolish__listItemDismissBottom {
+  font-size: $ouiFontSizeXS;
+  color: $ouiColorMediumShade;
+  background: none;
+  border: none;
+  padding: 6px 0 2px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: color 150ms ease;
+
+  &:hover {
+    color: $ouiColorDanger;
+  }
+}
+
+.uiPolish__listItemEmpty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: $ouiSizeXL $ouiSize;
+  border: 1px dashed $ouiBorderColor;
+  border-radius: $ouiBorderRadius;
+  color: $ouiColorMediumShade;
+  font-size: $ouiFontSizeS;
+  background-color: $ouiPageBackgroundColor;
+}
+
+.uiPolish__discoverGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: $ouiSize;
+
+  &--3col {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.uiPolish__discoverGridItem {
+  display: flex;
+  align-items: center;
+  gap: $ouiSizeS;
+  padding: $ouiSize;
+  height: 64px;
+  border: $ouiBorderThin;
+  border-radius: 8px;
+  background-color: $ouiColorEmptyShade;
+  cursor: pointer;
+  font-size: $ouiFontSizeS;
+  color: $ouiTextColor;
+  transition: background-color $ouiAnimSpeedFast ease-in-out;
+
+  &:hover {
+    background-color: $ouiFocusBackgroundColor;
+  }
+
+  &--disabled {
+    cursor: default;
+
+    &:hover {
+      background-color: $ouiColorEmptyShade;
+    }
+  }
+}
+
+.uiPolish__listItemContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.uiPolish__listItemIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.uiPolish__listItemRight {
+  display: flex;
+  align-items: center;
+  gap: $ouiSizeS;
+  flex-shrink: 0;
+}
+
+.uiPolish__listItemTitle {
+  flex: 1;
+  font-family: $ouiFontFamily;
+  font-size: 13px;
+  font-weight: 600;
+  color: $ouiTitleColor;
+  line-height: 1.55;
+  letter-spacing: -0.1px;
+}
+
+.uiPolish__activityCard .uiPolish__listItemTitle {
+  font-weight: $ouiFontWeightMedium;
+}
+
+.uiPolish__listItemTime {
+  color: $ouiColorMediumShade;
+  font-family: $ouiFontFamily;
+  font-size: 11px;
+  white-space: normal;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.uiPolish__listItemSummary {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 4px;
+  font-size: $ouiFontSizeXS;
+  color: $ouiColorMediumShade;
+  line-height: 1.5;
+  margin-top: 4px;
+  white-space: normal;
+}
+
+.uiPolish__listItemMeta {
+  color: $ouiColorMediumShade;
+  font-size: $ouiFontSizeXS;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+// Filter chips row (tab pills)
+.uiPolish__chips {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.uiPolish__chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background-color: transparent;
+  border: 1px solid $ouiBorderColor;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 500;
+  color: $ouiColorMediumShade;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  min-width: 0;
+  position: relative;
+
+  .ouiIcon {
+    width: 12px;
+    height: 12px;
+  }
+
+  &:hover {
+    background-color: rgba($ouiColorEmptyShade, 0.7);
+    border-color: rgba($ouiColorPrimary, 0.3);
+    color: $ouiColorPrimary;
+  }
+
+  &--active {
+    background-color: $ouiColorEmptyShade;
+    border-color: $ouiColorPrimary;
+    color: $ouiColorPrimary;
+    font-weight: 600;
+    box-shadow: 0 2px 8px -4px rgba($ouiColorPrimary, 0.30);
+
+    &:hover {
+      background-color: $ouiColorEmptyShade;
+      border-color: $ouiColorPrimary;
+    }
+  }
+}
+
+.uiPolish__searchLabel {
+  font-size: $ouiFontSizeXS;
+  color: $ouiColorMediumShade;
+  text-align: left;
+  padding-left: 8px;
+}
+
+// Meta pill (e.g. alert source) — inline pill above summary
+.uiPolish__listItemMetaPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  margin-top: 4px;
+  background-color: tintOrShade($ouiColorWarning, 85%, 75%);
+  border: 1px solid tintOrShade($ouiColorWarning, 60%, 50%);
+  border-radius: 999px;
+  font-size: $ouiFontSizeXS;
+  color: $ouiColorDarkShade;
+  line-height: 1.4;
+  width: fit-content;
+}
+
+// Activity card layout
+.uiPolish__activityCard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+}
+
+.uiPolish__activityCardHeader {
+  display: flex;
+  align-items: center;
+  gap: $ouiSizeS;
+}
+
+.uiPolish__activityCardPills {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.uiPolish__activityPill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  font-size: $ouiFontSizeXS;
+  color: $ouiColorDarkShade;
+  line-height: 1.5;
+  width: 100%;
+}
+
+.uiPolish__activityPillText {
+  flex: 1;
+  min-width: 0;
+}
+
+.uiPolish__activityPillMeta {
+  flex-shrink: 0;
+  color: $ouiColorMediumShade;
+  font-size: $ouiFontSizeXS;
+  white-space: nowrap;
+}
+
+// Chip badge (count)
+.uiPolish__chipBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background-color: $ouiColorPrimary;
+  color: #fff;
+  font-family: $ouiCodeFontFamily;
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.2;
+
+  .uiPolish__chip:not(.uiPolish__chip--active) & {
+    background-color: rgba($ouiColorDarkestShade, 0.08);
+    color: $ouiColorMediumShade;
+  }
+}
+
+// Findings section header
+.uiPolish__findingsHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding: 0 2px;
+}
+
+.uiPolish__findingsLabel {
+  font-family: $ouiCodeFontFamily;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+  color: $ouiColorPrimary;
+  text-transform: uppercase;
+}
+
+.uiPolish__markAllRead {
+  font-family: $ouiFontFamily;
+  font-size: 11px;
+  font-weight: 500;
+  color: $ouiColorMediumShade;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+
+  &:hover {
+    color: $ouiColorPrimary;
+  }
+}
+
+// Finding card (new activity layout)
+.uiPolish__findingCard {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+}
+
+.uiPolish__findingCardSummary {
+  font-family: $ouiFontFamily;
+  font-size: 13px;
+  font-weight: 600;
+  color: $ouiTitleColor;
+  line-height: 1.55;
+  letter-spacing: -0.1px;
+}
+
+.uiPolish__findingCardMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  color: $ouiColorMediumShade;
+  font-weight: 400;
+}
+
+.uiPolish__findingDot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: #fff;
+  font-family: $ouiFontFamily;
+  font-size: 10px;
+  font-weight: 600;
+
+  .osmascot-svg {
+    filter: none !important;
+  }
+
+  &--alert {
+    background: #DC3545;
+  }
+}
+
+.uiPolish__findingSource {
+  font-family: $ouiFontFamily;
+  font-size: 11px;
+  font-weight: 400;
+  color: $ouiColorMediumShade;
+  line-height: 1.5;
+
+  b, strong {
+    color: $ouiTitleColor;
+    font-weight: 600;
+  }
+}
+
+.uiPolish__findingTime {
+  font-family: $ouiFontFamily;
+  font-size: 11px;
+  color: $ouiColorMediumShade;
+}
+
+.uiPolish__findingTabs {
+  font-family: $ouiFontFamily;
+  font-size: 11px;
+  color: $ouiColorMediumShade;
+}
+
+.uiPolish__findingBadge {
+  font-family: $ouiCodeFontFamily;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background-color: rgba(197, 57, 97, 0.08);
+  color: #C53961;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1.3;
+  border: 1px solid rgba(197, 57, 97, 0.30);
+}
+
+.uiPolish__findingChip {
+  font-family: $ouiCodeFontFamily;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1.3;
+  display: inline-flex;
+  align-items: center;
+
+  &--warn {
+    background-color: rgba(194, 139, 46, 0.10);
+    color: #A8761F;
+    border: 1px solid rgba(194, 139, 46, 0.30);
+  }
+
+  &--service {
+    background-color: rgba(31, 108, 181, 0.08);
+    color: $ouiColorPrimary;
+    border: 1px solid rgba(31, 108, 181, 0.25);
+  }
+}
+
+.uiPolish__findingOpen {
+  margin-left: auto;
+  font-family: $ouiCodeFontFamily;
+  color: $ouiColorPrimary;
+  font-weight: 700;
+  font-size: 9px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+// Empty card (all clear state)
+.uiPolish__emptyCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 40px 28px;
+  border: 1px dashed $ouiBorderColor;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.uiPolish__emptyCardTitle {
+  font-family: $ouiFontFamily;
+  font-size: 13px;
+  font-weight: 600;
+  color: $ouiTitleColor;
+}
+
+.uiPolish__emptyCardText {
+  font-family: $ouiFontFamily;
+  font-size: 11px;
+  color: $ouiColorMediumShade;
+}
+
+// Pinned section
+.uiPolish__pinnedSection {
+  margin-top: 28px;
+  width: 100%;
+}
+
+.uiPolish__pinnedEmpty {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: center;
+  padding: 32px 28px;
+  border: 1px dashed $ouiBorderColor;
+  border-radius: 10px;
+  background: rgba($ouiColorEmptyShade, 0.4);
+  overflow: hidden;
+}
+
+.uiPolish__pinnedEmptyLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.uiPolish__pinnedEmptyTitle {
+  font-family: $ouiFontFamily;
+  font-size: 14px;
+  font-weight: 600;
+  color: $ouiTitleColor;
+}
+
+.uiPolish__pinnedEmptyText {
+  font-family: $ouiFontFamily;
+  font-size: 12px;
+  color: $ouiColorMediumShade;
+  line-height: 1.5;
+  max-width: 480px;
+}
+
+.uiPolish__pinnedPinBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 6px 1px 5px;
+  margin: 0 4px;
+  border: 1px solid $ouiBorderColor;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  color: $ouiTitleColor;
+  vertical-align: baseline;
+}
+
+.uiPolish__pinnedChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.uiPolish__pinnedChip {
+  font-family: $ouiCodeFontFamily;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  color: $ouiColorMediumShade;
+  background: rgba($ouiColorDarkestShade, 0.04);
+  letter-spacing: 0.4px;
+  border: none;
+}
+
+.uiPolish__pinnedEmptyRight {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  opacity: 0.4;
+
+  @media (max-width: 680px) {
+    display: none;
+  }
+}
+
+.uiPolish__pinnedPlaceholder {
+  width: 70px;
+  height: 56px;
+  border-radius: 6px;
+  background-color: $ouiColorEmptyShade;
+  border: 1px solid $ouiBorderColor;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 1;
+  min-width: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 6px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 70%;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba($ouiColorDarkestShade, 0.08);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    width: 40%;
+    height: 8px;
+    border-radius: 2px;
+    background: rgba($ouiColorDarkestShade, 0.08);
+  }
+}
+
+// Widget grid (populated pinned state)
+.uiPolish__widgetGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.uiPolish__widgetTile {
+  background: $ouiColorEmptyShade;
+  border: 1px solid $ouiBorderColor;
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+  min-height: 148px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  position: relative;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+    .uiPolish__widgetMenu {
+      opacity: 1;
+    }
+  }
+
+  &--alert {
+    border-color: rgba($ouiColorDanger, 0.30);
+  }
+}
+
+// Three-dot menu on widget tiles
+.uiPolish__widgetMenu {
+  opacity: 0;
+  transition: opacity 150ms ease;
+  position: relative;
+}
+
+.uiPolish__widgetMenuBtn {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border: none;
+  background: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: $ouiColorMediumShade;
+  transition: background 150ms ease, color 150ms ease;
+
+  &:hover {
+    background: rgba($ouiColorDarkestShade, 0.08);
+    color: $ouiTitleColor;
+  }
+}
+
+.uiPolish__widgetMenuDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 20;
+  min-width: 140px;
+  background: $ouiColorEmptyShade;
+  border: 1px solid $ouiBorderColor;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.uiPolish__widgetMenuItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: none;
+  background: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  color: $ouiTextColor;
+  text-align: left;
+  transition: background 100ms ease;
+
+  &:hover {
+    background: rgba($ouiColorDarkestShade, 0.06);
+  }
+}
+
+.uiPolish__widgetTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.uiPolish__widgetInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.uiPolish__widgetKind {
+  font-family: $ouiCodeFontFamily;
+  font-size: 8px;
+  letter-spacing: 0.8px;
+  color: $ouiColorMediumShade;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.uiPolish__widgetTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: $ouiTitleColor;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.uiPolish__widgetLive {
+  display: none;
+}
+
+.uiPolish__widgetLiveDot {
+  display: none;
+}
+
+.uiPolish__widgetPreview {
+  margin: 2px -4px;
+  min-height: 56px;
+  display: flex;
+  align-items: flex-end;
+
+  svg {
+    display: block;
+  }
+
+  &--rank {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    justify-content: center;
+  }
+}
+
+.uiPolish__widgetRankRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.uiPolish__widgetRankNum {
+  font-family: $ouiCodeFontFamily;
+  font-size: 10px;
+  color: $ouiColorMediumShade;
+  width: 12px;
+  flex-shrink: 0;
+}
+
+.uiPolish__widgetRankName {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  color: $ouiTitleColor;
+  font-weight: 500;
+  flex: 0 1 80px;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.uiPolish__widgetRankBar {
+  flex: 1;
+  min-width: 16px;
+  height: 4px;
+  background: rgba($ouiColorDarkestShade, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.uiPolish__widgetRankBarFill {
+  display: block;
+  height: 100%;
+  background: $ouiColorPrimary;
+  opacity: 0.75;
+}
+
+.uiPolish__widgetRankVal {
+  font-family: $ouiCodeFontFamily;
+  font-size: 10px;
+  color: $ouiColorMediumShade;
+  width: 28px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.uiPolish__widgetFooter {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.uiPolish__widgetValue {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: $ouiTitleColor;
+  letter-spacing: -0.3px;
+  line-height: 1.1;
+  white-space: nowrap;
+
+  &--alert {
+    color: $ouiColorDanger;
+  }
+}
+
+.uiPolish__widgetTrend {
+  font-family: $ouiCodeFontFamily;
+  font-size: 9.5px;
+  color: $ouiColorMediumShade;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+
+  &--up {
+    color: $ouiColorDanger;
+  }
+
+  &--down {
+    color: $ouiColorSuccess;
+  }
+
+  &--flat {
+    color: $ouiColorMediumShade;
+  }
+}
+
+// Add widget slot
+.uiPolish__widgetAdd {
+  border: 1px dashed $ouiBorderColor;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  color: $ouiColorMediumShade;
+  min-height: 148px;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+
+  &:hover {
+    border-color: $ouiColorPrimary;
+    color: $ouiColorPrimary;
+    background: rgba($ouiColorPrimary, 0.04);
+  }
+}
+
+.uiPolish__widgetAddCircle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px dashed $ouiBorderColor;
+  display: grid;
+  place-items: center;
+  color: inherit;
+}
+
+.uiPolish__widgetAddTitle {
+  font-family: $ouiFontFamily;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: $ouiTextColor;
+}
+
+.uiPolish__widgetAddSub {
+  font-family: $ouiFontFamily;
+  font-size: 10.5px;
+  color: $ouiColorMediumShade;
+  text-align: center;
+  padding: 0 16px;
+  line-height: 1.35;
+}

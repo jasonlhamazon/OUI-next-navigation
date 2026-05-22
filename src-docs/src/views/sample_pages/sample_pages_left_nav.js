@@ -1793,8 +1793,8 @@ const ProfilePopoverContent = () => {
   return (
     <div className="samplePagesLeftNav__toolsPopover">
       <div className="samplePagesLeftNav__profilePopoverHeader">
-        <OuiAvatar name="OS" size="s" />
-        <span className="samplePagesLeftNav__profilePopoverName">John</span>
+        <OuiAvatar name="JD" size="s" color="#2E4A8F" initialsLength={2} />
+        <span className="samplePagesLeftNav__profilePopoverName">John Doe</span>
       </div>
       <div className="samplePagesLeftNav__toolsPopoverContent">
         <button

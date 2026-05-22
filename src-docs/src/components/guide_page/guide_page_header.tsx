@@ -147,6 +147,15 @@ export const GuidePageHeader: React.FunctionComponent<{}> = () => {
               }}>
               Day N experience
             </OuiContextMenuItem>,
+            <OuiContextMenuItem
+              key="ui-polish"
+              icon="empty"
+              onClick={() => {
+                setSamplePagesPopoverOpen(false);
+                window.location.hash = '/ui-polish';
+              }}>
+              Visual Polish
+            </OuiContextMenuItem>,
           ]}
         />
       </OuiPopover>

@@ -38,6 +38,7 @@ import {
 import { LoginPage } from './views/sample_pages/login_page';
 import { OnboardingPage } from './views/sample_pages/onboarding_page';
 import { OnboardingWizardPage } from './views/sample_pages/onboarding_wizard_page';
+import { UiPolishPage } from './views/sample_pages/ui_polish_home';
 
 registerTheme('light', [themeLight]);
 registerTheme('dark', [themeDark]);
@@ -105,6 +106,14 @@ render(
             render={() => (
               <LinkWrapper>
                 <SessionPagesView />
+              </LinkWrapper>
+            )}
+          />
+          <Route
+            path="/ui-polish"
+            render={() => (
+              <LinkWrapper>
+                <UiPolishPage />
               </LinkWrapper>
             )}
           />
