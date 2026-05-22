@@ -37,9 +37,9 @@ const LIGHT = {
   textPrimary: '#0B1733',
   textMuted: '#9BA3C2',
   textSub: '#B2B8D2',
-  recentActiveBg: '#E8ECF9',
-  recentMetaDot: '#C5D0F8',
-  accent: '#2D4BD8',
+  recentActiveBg: '#EDF2F8',
+  recentMetaDot: '#B8D0E8',
+  accent: '#2E4A8F',
   avatarBg: '#DC3545',
   borderRight: '#E0E2ED',
 };
@@ -140,13 +140,25 @@ function NavRail({ onExpand, spinKey, dark, navPopover, openNavPopover, closeNav
       {/* Top scrollable section */}
       <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', overflowX: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
         <div style={{ marginBottom: 8, flexShrink: 0 }}>
-          <OSLogo size={22} spinKey={spinKey} />
+          <OuiToolTip content="Hi, I'm Olly, your OpenSearch Observability assistant." position="right">
+            <span style={{ display: 'inline-flex', cursor: 'pointer' }}>
+              <OSLogo size={22} spinKey={spinKey} />
+            </span>
+          </OuiToolTip>
         </div>
-        <RailButton icon="sidebar" t={t} onClick={(e) => { e.stopPropagation(); onExpand(); }} />
+        <OuiToolTip content="Toggle sidebar" position="right">
+          <span><RailButton icon="sidebar" t={t} onClick={(e) => { e.stopPropagation(); onExpand(); }} /></span>
+        </OuiToolTip>
         <Divider width={24} color={t.divider} />
-        <RailButton icon="plus" t={t} onClick={(e) => { e.stopPropagation(); onCreateSession && onCreateSession(); }} />
-        <RailButton icon="search" t={t} onClick={(e) => { e.stopPropagation(); onSearch && onSearch(); }} />
-        <RailButton icon="chats2" t={t} onClick={(e) => { e.stopPropagation(); onBrowseSessions && onBrowseSessions(); }} />
+        <OuiToolTip content="New session" position="right">
+          <span><RailButton icon="plus" t={t} onClick={(e) => { e.stopPropagation(); onCreateSession && onCreateSession(); }} /></span>
+        </OuiToolTip>
+        <OuiToolTip content="Search" position="right">
+          <span><RailButton icon="search" t={t} onClick={(e) => { e.stopPropagation(); onSearch && onSearch(); }} /></span>
+        </OuiToolTip>
+        <OuiToolTip content="All sessions" position="right">
+          <span><RailButton icon="chats2" t={t} onClick={(e) => { e.stopPropagation(); onBrowseSessions && onBrowseSessions(); }} /></span>
+        </OuiToolTip>
       </div>
 
       {/* Bottom pinned section with popovers */}

@@ -18,7 +18,27 @@ import {
 } from '../../../../src/components';
 
 import { SOURCE_PAGE_MOCK } from './session_models';
-import OpenSearchMascot from './open_search_mascot';
+// Mascot placeholder - inline OpenSearch logo
+const OpenSearchMascot = ({ size = 28 }) => (
+  <svg width={size} height={size} viewBox="0 0 80 80" fill="none">
+    <defs>
+      <linearGradient id="mascotGrad" x1="40" y1="80" x2="40" y2="0" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#153A5A" />
+        <stop offset="1" stopColor="#14558E" />
+      </linearGradient>
+      <radialGradient id="mascotHL" cx="0.3" cy="0.25" r="0.6">
+        <stop offset="0" stopColor="rgba(255,255,255,0.18)" />
+        <stop offset="1" stopColor="rgba(255,255,255,0)" />
+      </radialGradient>
+    </defs>
+    <circle cx="40" cy="40" r="39.5" fill="url(#mascotGrad)" />
+    <ellipse cx="28" cy="22" rx="22" ry="14" fill="url(#mascotHL)" />
+    <g transform="translate(48, 31) scale(1) translate(-48, -31)">
+      <path d="M 34.683 36.338 C 35.807 36.175 37.166 35.792 38.484 34.55 C 41.213 31.978 41.23 27.557 38.948 25.291 C 38.054 24.404 36.446 24.068 35.112 25.325 C 34.532 25.871 34.42 26.47 34.547 27.187 C 34.667 27.87 34.994 28.604 35.365 29.436 C 35.813 30.44 36.34 31.599 36.409 32.77 C 36.491 34.173 36.241 35.386 34.683 36.338 Z" fill="#fff" />
+      <path d="M 52.683 36.338 C 53.807 36.175 55.166 35.792 56.484 34.55 C 59.213 31.978 59.23 27.557 56.948 25.291 C 56.054 24.404 54.446 24.068 53.112 25.325 C 52.532 25.871 52.42 26.47 52.547 27.187 C 52.667 27.87 52.994 28.604 53.365 29.436 C 53.813 30.44 54.34 31.599 54.409 32.77 C 54.491 34.173 54.241 35.386 52.683 36.338 Z" fill="#fff" />
+    </g>
+  </svg>
+);
 
 /**
  * Quick access shortcut definitions.
@@ -560,22 +580,19 @@ export const UiPolishEmptySession = ({
       <div className="uiPolish__panel">
         {/* Agent identity + greeting */}
         <div className="uiPolish__header">
-          <div className="uiPolish__agentRow">
-            <div className="uiPolish__agentAvatar">
-              <OpenSearchMascot size={28} idle bob={false} follow={false} />
+          <div className="uiPolish__heroRow">
+            <div className="uiPolish__heroMascot">
+              <OpenSearchMascot size={40} />
+              <span className="uiPolish__heroTooltip">Hi, I&apos;m Olly, your OpenSearch Observability assistant.</span>
             </div>
-            <div className="uiPolish__agentInfo">
-              <span className="uiPolish__agentName">
-                Olly
-                <span className="uiPolish__agentDot" />
-              </span>
-              <span className="uiPolish__agentLabel">OPENSEARCH OBSERVABILITY AGENT</span>
+            <div className="uiPolish__heroText">
+              <h1 className="uiPolish__heroTitle">Good morning, John</h1>
+              <p className="uiPolish__heroSub">
+                <span className="uiPolish__heroSubBold">All 247 services steady.</span>{' '}
+                <span className="uiPolish__heroSubLight">2 findings to review.</span>
+              </p>
             </div>
           </div>
-          <h1 className="uiPolish__greeting">
-            <span className="uiPolish__greetingBold">Good morning, John —</span>{' '}
-            <span className="uiPolish__greetingLight">all 247 services steady overnight. 2 findings to review.</span>
-          </h1>
         </div>
 
         {/* Content container — max 832px */}

@@ -70,32 +70,88 @@
   z-index: 1;
 }
 
-.uiPolish__agentRow {
+.uiPolish__heroRow {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 16px;
+  gap: 16px;
 }
 
-.uiPolish__agentAvatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.uiPolish__heroMascot {
   flex-shrink: 0;
-  overflow: hidden;
+  position: relative;
+  cursor: pointer;
 
-  .osmascot-svg {
-    filter: none !important;
+  svg g path {
+    animation: mascotBlink 3s ease-in-out infinite;
+  }
+
+  &:hover .uiPolish__heroTooltip {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-.uiPolish__agentInfo {
+.uiPolish__heroTooltip {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 10px);
+  transform: translateY(-4px);
+  background: $ouiColorFullShade;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 16px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease, transform 200ms ease;
+  z-index: 10;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 20px;
+    border: 6px solid transparent;
+    border-bottom-color: $ouiColorFullShade;
+  }
+}
+
+@keyframes mascotBlink {
+  0%, 90%, 100% { transform: scaleY(1); transform-origin: center; }
+  95% { transform: scaleY(0.1); transform-origin: center; }
+}
+
+.uiPolish__heroText {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
+}
+
+.uiPolish__heroTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: $ouiTitleColor;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.uiPolish__heroSub {
+  font-size: 15px;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.uiPolish__heroSubBold {
+  font-weight: 600;
+  color: $ouiColorDarkShade;
+}
+
+.uiPolish__heroSubLight {
+  color: $ouiColorMediumShade;
 }
 
 .uiPolish__agentName {

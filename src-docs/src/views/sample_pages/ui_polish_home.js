@@ -56,21 +56,9 @@ function initializeSessionState() {
     createdAt: s.createdAt,
   }));
 
-  const emptySession = {
-    id: `session-${now}-${Math.random().toString(36).slice(2, 9)}`,
-    threadKey: null,
-    pendingThread: null,
-    title: 'New Session',
-    threadPanelState: 'minimized',
-    threadPanelWidth: 30,
-    tabs: [],
-    activeTabId: null,
-    createdAt: now,
-  };
-
   return {
-    sessions: [emptySession, LATENCY_SPIKE_SESSION, ERROR_RATE_SPIKE_SESSION, ...mockSessions],
-    activeSessionId: emptySession.id,
+    sessions: [LATENCY_SPIKE_SESSION, ERROR_RATE_SPIKE_SESSION, ...mockSessions],
+    activeSessionId: null,
     version: 1,
   };
 }
