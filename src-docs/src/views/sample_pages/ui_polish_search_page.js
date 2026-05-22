@@ -71,8 +71,8 @@ const TABS = [
  * @param {Object} props
  * @param {(pageKey: string, title: string) => void} props.onSelectPage - Opens a page
  */
-export const UiPolishSearchPage = ({ onSelectPage }) => {
-  const [searchQuery, setSearchQuery] = useState('');
+export const UiPolishSearchPage = ({ onSelectPage, initialQuery = '' }) => {
+  const [searchQuery, setSearchQuery] = useState(initialQuery);
   const [activeTab, setActiveTab] = useState('all');
 
   const filteredItems = LIBRARY_OBJECTS.filter((item) => {

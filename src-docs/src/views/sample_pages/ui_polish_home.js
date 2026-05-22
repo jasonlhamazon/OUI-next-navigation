@@ -71,6 +71,7 @@ export const UiPolishPage = () => {
   const [sessionState, setSessionState] = useState(initializeSessionState);
   const [activeView, setActiveView] = useState('session');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const activeSession = sessionState.sessions.find(
     (s) => s.id === sessionState.activeSessionId
@@ -186,6 +187,7 @@ export const UiPolishPage = () => {
     if (activeView === 'library') {
       return (
         <UiPolishSearchPage
+          initialQuery={searchQuery}
           onSelectPage={(pageKey, title) => {
             setSessionState((prev) => {
               const next = createSession(prev);
@@ -211,7 +213,10 @@ export const UiPolishPage = () => {
     if (!activeSession || isEmptySession) {
       return (
         <UiPolishEmptySession
-          onStartThread={handleStartThread}
+          onStartThread={(prompt) => {
+            setSearchQuery(prompt || '');
+            setActiveView('library');
+          }}
           onOpenPage={handleOpenPage}
           onViewSession={() => handleSelectSession('latency-spike-session')}
           onStartInvestigation={() => {}}
